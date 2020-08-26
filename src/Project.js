@@ -5,7 +5,7 @@ import ProjectHeadline from './ProjectHeadline'
 export default function Project({ title, country, description, image }) {
   return (
     <Card>
-      <Img alt='Wildfire extinguishing plane' src={image}></Img>
+      <Img alt='' src={image}></Img>
       <ProjectHeadline title={title} country={country} />
       <Description>{description}</Description>
     </Card>

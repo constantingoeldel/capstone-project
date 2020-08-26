@@ -19,6 +19,8 @@ const Card = styled.section`
 `
 const Img = styled.img`
   width: 100%;
+  height: 250px;
+  object-fit: cover;
   border-radius: 42px 42px 0 0;
 `
 const Description = styled.p`

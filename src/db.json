@@ -1,0 +1,22 @@
+{
+  "projects": [
+    {
+      "title": "Take a breather",
+      "country": "AUS",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tempus erat at urna semper tempus. Cras euismod semper turpis, at luctus elit dignissim non. Curabitur id arcu in justo pellentesque.",
+      "image": "/images/wildfire.jpg"
+    },
+    {
+      "title": "ZeroClimate",
+      "country": "SWE",
+      "description": "Lorem ipsum doloruelit dignissim non. Curabitur id arcu in justo pellentesque.",
+      "image": "/images/ZeroClimate.jpg"
+    },
+    {
+      "title": "Never Refuse Refuge",
+      "country": "LIB",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tempus erat at urna semper tempus. Cras turpis, at luctus elit",
+      "image": "/images/refugees.jpg"
+    }
+  ]
+}

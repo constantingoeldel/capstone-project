@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import Project from './Project'
+import projectContent from './db.json'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      {projectContent.projects.map((project, index) => (
+        <Project
+          key={index}
+          title={project.title}
+          country={project.country}
+          description={project.description}
+          image={project.image}
+        />
+      ))}
+    </>
+  )
 }
 
-export default App;
+export default App

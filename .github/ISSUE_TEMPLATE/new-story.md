@@ -4,7 +4,7 @@ about: Create a new story following the agile development process
 title: "[Story] "
 labels: enhancement
 assignees: constantingoeldel
-
+project: capstoneProject
 ---
 
 # Value statement

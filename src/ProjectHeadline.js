@@ -18,4 +18,7 @@ const H3 = styled.h3`
   font-size: 170%;
   padding: 10px 10px 5px 15px;
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `

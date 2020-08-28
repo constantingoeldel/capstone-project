@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from 'styled-components/macro'
-import ProjectHeadline from './ProjectHeadline'
+import ProjectHeadline from '../components/ProjectHeadline'
+import '../index.css'
 
-export default function Project({ title, country, description, image }) {
+export const Project = ({ title, country, description, image }) => {
   return (
     <Card>
-      <Img alt='' src={image}></Img>
+      <Img alt='' src={image || 'https://source.unsplash.com/random'}></Img>
       <ProjectHeadline title={title} country={country} />
       <Description>{description}</Description>
     </Card>

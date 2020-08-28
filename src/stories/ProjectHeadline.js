@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 
-export default function ProjectHeadline({ title, country }) {
+export const ProjectHeadline = ({ title, country }) => {
   return (
     <Headline>
       <H3>
-        {title} | {country}
+        {country} | {title}
       </H3>
     </Headline>
   )

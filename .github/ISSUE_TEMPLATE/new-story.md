@@ -1,7 +1,7 @@
 ---
 name: New Story
 about: Create a new story following the agile development process
-title: "[Story] "
+title: "[Story]"
 labels: enhancement
 assignees: constantingoeldel
 
@@ -30,11 +30,13 @@ so that
 
 # Tasks
 
+
+- [ ] TESTS 
+- [ ] Storybook
 - [ ] 
-- [ ]
 - [ ] 
 - [ ] 
 - [ ] 
-- [ ] Tests
+
 
 # Complexity

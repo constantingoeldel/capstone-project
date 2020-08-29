@@ -23,10 +23,13 @@ describe('Project', () => {
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tempus erat at urna semper tempus. Cras turpis, at luctus elit'
     )
   })
-  it('shows the pictures', () => {
-    cy.get('.Project__Img-nm2m85-1').should('be.visible')
+  it('shows the pictures with correct height', () => {
+    cy.get('img').should('have.css', 'height', '250px')
   })
   it('renders enough projects', () => {
-    cy.get('.Project__Card-nm2m85-0').should('have.length.above', 10)
+    cy.get('.Project__Card-nm2m85-0').should('have.length.above', 100)
+  })
+  it('has a picture for every project', () => {
+    cy.get(`img[src*="/"]`).should('have.length.above', 100)
   })
 })

@@ -45,7 +45,6 @@
     "@storybook/react": "^6.0.19",
     "babel-loader": "^8.1.0",
     "cypress": "^5.0.0",
-    "jest": "^26.4.2",
     "react-is": "^16.13.1"
   }
 }

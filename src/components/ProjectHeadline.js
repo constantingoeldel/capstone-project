@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/macro'
+import PropTypes from 'prop-types'
 
 export default function ProjectHeadline({ title, country }) {
   return (
@@ -9,6 +10,10 @@ export default function ProjectHeadline({ title, country }) {
       </H3>
     </Headline>
   )
+}
+ProjectHeadline.propTypes = {
+  title: PropTypes.string.isRequired,
+  country: PropTypes.string.isRequired,
 }
 const Headline = styled.section`
   display: flex;

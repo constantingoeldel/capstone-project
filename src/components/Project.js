@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 import ProjectHeadline from './ProjectHeadline'
+import PropTypes from 'prop-types'
 
 export default function Project({ title, country, description, image }) {
   return (
@@ -10,6 +11,12 @@ export default function Project({ title, country, description, image }) {
       <Description>{description}</Description>
     </Card>
   )
+}
+Project.propTypes = {
+  title: PropTypes.string.isRequired,
+  country: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  image: PropTypes.string,
 }
 
 const Card = styled.section`

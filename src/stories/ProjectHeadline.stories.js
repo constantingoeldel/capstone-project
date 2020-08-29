@@ -1,5 +1,5 @@
 import React from 'react'
-import { ProjectHeadline } from './ProjectHeadline'
+import ProjectHeadline from '../components/ProjectHeadline'
 
 export default {
   title: 'ProjectHeadline',

@@ -1,5 +1,6 @@
 import React from 'react'
-import { Project } from './Project'
+import Project from '../components/Project'
+import '../index.css'
 
 export default {
   title: 'Project',

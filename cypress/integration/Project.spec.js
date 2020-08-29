@@ -2,6 +2,7 @@
 
 describe('Project', () => {
   beforeEach(() => {
+    cy.viewport(375, 667)
     cy.visit('http://localhost:3000')
   })
   it('Displays the headlines correctly', () => {

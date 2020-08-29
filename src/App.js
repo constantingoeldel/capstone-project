@@ -1,11 +1,11 @@
 import React from 'react'
 import Project from './components/Project'
-import projectContent from './db.json'
+import mockData from './db.json'
 
 function App() {
   return (
     <>
-      {projectContent.projects.map((project, index) => (
+      {mockData.projects.map((project, index) => (
         <Project
           key={index}
           title={project.title}

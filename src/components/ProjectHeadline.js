@@ -4,20 +4,15 @@ import PropTypes from 'prop-types'
 
 export default function ProjectHeadline({ title, country }) {
   return (
-    <Headline>
-      <H3>
-        {country} | {title}
-      </H3>
-    </Headline>
+    <H3>
+      {country} | {title}
+    </H3>
   )
 }
 ProjectHeadline.propTypes = {
   title: PropTypes.string.isRequired,
   country: PropTypes.string.isRequired,
 }
-const Headline = styled.section`
-  display: flex;
-`
 const H3 = styled.h3`
   font-weight: 300;
   font-size: 170%;

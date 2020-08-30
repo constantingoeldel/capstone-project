@@ -1,3 +1,7 @@
+## Deployment:
+
+Visit the website @ https://unfinished.vercel.app/ 
+
 ## Available Scripts
 
 To get this app to run, use these commands: 

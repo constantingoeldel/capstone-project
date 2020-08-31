@@ -10,6 +10,7 @@
 /cypress/integration/examples
 # production
 /build
+/.vscode
 
 # misc
 .DS_Store

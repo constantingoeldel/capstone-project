@@ -3,7 +3,7 @@ import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 import Tags from './Tags'
 
-export default function TagCluster({ tags }) {
+export default function TagCluster({ tags, onTagClick }) {
   return (
     <TagList>
       {tags.map((tag, index) => (
@@ -12,8 +12,8 @@ export default function TagCluster({ tags }) {
     </TagList>
   )
   function selectTag(event, tag) {
-    console.log(event.target)
     event.target.classList.toggle('active')
+    onTagClick(tag)
   }
 }
 

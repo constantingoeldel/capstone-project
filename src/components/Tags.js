@@ -3,8 +3,7 @@ import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 
 export default function Tags({ content, onClick }) {
-  console.log(content)
-  return <Tag onClick={onClick}>{content}</Tag>
+  return <Tag onClick={(event) => onClick(event, content)}>{content}</Tag>
 }
 Tags.propTypes = {
   content: PropTypes.string.isRequired,
@@ -12,6 +11,7 @@ Tags.propTypes = {
 }
 const Tag = styled.li`
   display: inline-block;
+  white-space: nowrap;
   color: white;
   margin: 4px 5px;
   text-decoration: none;

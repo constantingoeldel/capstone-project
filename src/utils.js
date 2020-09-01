@@ -14,5 +14,9 @@ export function sortByTags(tags, source) {
         secondProject.applyingTags.size - firstProject.applyingTags.size
     )
     .filter((project) => tags.length === 0 || project.applyingTags.size > 0)
+  console.log(projects)
   return projects
+}
+export function sum(a, b) {
+  return a + b
 }

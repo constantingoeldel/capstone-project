@@ -33,4 +33,25 @@ describe('Project', () => {
   it('has a picture for every project', () => {
     cy.get(`img[src*="/"]`).should('have.length.above', 100)
   })
+  it('shows all tags', () => {
+    cy.get('.TagCluster__TagList-x84l3-0 > li').should('have.length', 12)
+  })
+  it('shows tags on card', () => {
+    cy.get('.Project__Card-nm2m85-0 > ul > li').should('be.visible').and('have.length.above', 200)
+  })
+  it('Tag is clickable & correct color', () => {
+    cy.get('.TagCluster__TagList-x84l3-0 > :nth-child(1)')
+      .click()
+      .should('have.css', 'background-color', 'rgb(27, 153, 139)')
+  })
+  it('Displays less projects after filter', () => {
+    cy.get('.TagCluster__TagList-x84l3-0 > :nth-child(1)').click()
+    cy.get('.Project__Card-nm2m85-0').should('have.length.below', 100)
+  })
+  it('sorts correctly', () => {
+    cy.get('.TagCluster__TagList-x84l3-0 > :nth-child(2)').click()
+    cy.get('.TagCluster__TagList-x84l3-0 > :nth-child(4)').click()
+    cy.get('.TagCluster__TagList-x84l3-0 > :nth-child(10)').click()
+    cy.get('#root > :nth-child(3)').should('contain', 'RU | Confess')
+  })
 })

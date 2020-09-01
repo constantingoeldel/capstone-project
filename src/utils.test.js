@@ -1,11 +1,8 @@
-// import { sum } from './utils'
-
-// test('Adds correctly', () => {
-//   expect(sum(1, 2)).toBe(3)
-// })
 import mockData from './db.json'
 import { sortByTags } from './utils'
 const tags = ['Leisure', 'Sport', 'People in need', 'Software Development']
+const tags2 = ['Non-Profit', 'For-Profit', 'Social Business', 'Technology', 'Food & Drink']
+const allTags = mockData.tags
 const expectedResult = [
   {
     title: 'Never Refuse Refuge',
@@ -54,6 +51,32 @@ const expectedResult = [
     applyingTags: new Set(['People in need']),
   },
 ]
+test('always returnes something', () => {
+  expect(sortByTags([], [{}])).toBeDefined()
+  expect(sortByTags(tags, [{}])).toBeDefined()
+  expect(sortByTags(undefined, undefined)).toBeDefined()
+})
+test('it returns all projects when no tags are selected', () => {
+  expect(sortByTags([], mockData.projects)).toHaveLength(103)
+})
 test('It filters correctly', () => {
   expect(sortByTags(tags, mockData.projects)).toEqual(expectedResult)
+})
+test('ordered correctly', () => {
+  expect(
+    sortByTags(tags2, mockData.projects)[0].applyingTags.size -
+      sortByTags(tags2, mockData.projects)[1].applyingTags.size
+  ).toBeGreaterThanOrEqual(0)
+  expect(
+    sortByTags(tags, mockData.projects)[0].applyingTags.size -
+      sortByTags(tags, mockData.projects)[1].applyingTags.size
+  ).toBeGreaterThanOrEqual(0)
+  expect(
+    sortByTags(allTags, mockData.projects)[0].applyingTags.size -
+      sortByTags(allTags, mockData.projects)[1].applyingTags.size
+  ).toBeGreaterThanOrEqual(0)
+  expect(
+    sortByTags([], mockData.projects)[0].applyingTags.size -
+      sortByTags([], mockData.projects)[1].applyingTags.size
+  ).toBeGreaterThanOrEqual(0)
 })

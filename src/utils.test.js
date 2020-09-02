@@ -51,32 +51,34 @@ const expectedResult = [
     applyingTags: new Set(['People in need']),
   },
 ]
-test('always returnes something', () => {
-  expect(sortByTags([], [{}])).toBeDefined()
-  expect(sortByTags(tags, [{}])).toBeDefined()
-  expect(sortByTags(undefined, undefined)).toBeDefined()
-})
-test('it returns all projects when no tags are selected', () => {
-  expect(sortByTags([], mockData.projects)).toHaveLength(103)
-})
-test('It filters correctly', () => {
-  expect(sortByTags(tags, mockData.projects)).toEqual(expectedResult)
-})
-test('ordered correctly', () => {
-  expect(
-    sortByTags(tags2, mockData.projects)[0].applyingTags.size -
-      sortByTags(tags2, mockData.projects)[1].applyingTags.size
-  ).toBeGreaterThanOrEqual(0)
-  expect(
-    sortByTags(tags, mockData.projects)[0].applyingTags.size -
-      sortByTags(tags, mockData.projects)[1].applyingTags.size
-  ).toBeGreaterThanOrEqual(0)
-  expect(
-    sortByTags(allTags, mockData.projects)[0].applyingTags.size -
-      sortByTags(allTags, mockData.projects)[1].applyingTags.size
-  ).toBeGreaterThanOrEqual(0)
-  expect(
-    sortByTags([], mockData.projects)[0].applyingTags.size -
-      sortByTags([], mockData.projects)[1].applyingTags.size
-  ).toBeGreaterThanOrEqual(0)
+describe('test sorting function', () => {
+  it('always returnes something', () => {
+    expect(sortByTags([], [{}])).toBeDefined()
+    expect(sortByTags(tags, [{}])).toBeDefined()
+    expect(sortByTags(undefined, undefined)).toBeDefined()
+  })
+  it('it returns all projects when no tags are selected', () => {
+    expect(sortByTags([], mockData.projects)).toHaveLength(103)
+  })
+  it('It filters correctly', () => {
+    expect(sortByTags(tags, mockData.projects)).toEqual(expectedResult)
+  })
+  it('ordered correctly', () => {
+    expect(
+      sortByTags(tags2, mockData.projects)[0].applyingTags.size -
+        sortByTags(tags2, mockData.projects)[1].applyingTags.size
+    ).toBeGreaterThanOrEqual(0)
+    expect(
+      sortByTags(tags, mockData.projects)[0].applyingTags.size -
+        sortByTags(tags, mockData.projects)[1].applyingTags.size
+    ).toBeGreaterThanOrEqual(0)
+    expect(
+      sortByTags(allTags, mockData.projects)[0].applyingTags.size -
+        sortByTags(allTags, mockData.projects)[1].applyingTags.size
+    ).toBeGreaterThanOrEqual(0)
+    expect(
+      sortByTags([], mockData.projects)[0].applyingTags.size -
+        sortByTags([], mockData.projects)[1].applyingTags.size
+    ).toBeGreaterThanOrEqual(0)
+  })
 })

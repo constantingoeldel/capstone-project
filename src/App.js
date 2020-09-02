@@ -11,12 +11,12 @@ export default function App() {
   const [projects, setProjects] = useState([])
   const [searchTerm, setSearchTerm] = useState(mockData.projects)
   useEffect(() => {
-    setProjects(sortByTags(selectedTags, mockData.projects))
-  }, [selectedTags])
+    setProjects(sortByTags(selectedTags, searchTerm))
+  }, [selectedTags, searchTerm])
 
-  useEffect(() => {
-    setProjects(searchTerm)
-  }, [searchTerm])
+  // useEffect(() => {
+  //   setProjects(searchTerm)
+  // }, [searchTerm])
   return (
     <>
       <Search onSearch={onSearch} />

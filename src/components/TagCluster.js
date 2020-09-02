@@ -19,6 +19,7 @@ export default function TagCluster({ tags, onTagClick }) {
 
 TagCluster.propTypes = {
   tags: PropTypes.array.isRequired,
+  onTagClick: PropTypes.func,
 }
 
 const TagList = styled.ul`

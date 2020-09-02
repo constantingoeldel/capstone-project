@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 
-export default function Tags({ content, onClick }) {
+export default function Tags({ content, onClick = () => {} }) {
   return <Tag onClick={(event) => onClick(event, content)}>{content}</Tag>
 }
 Tags.propTypes = {

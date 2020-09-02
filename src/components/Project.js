@@ -4,25 +4,22 @@ import ProjectHeadline from './ProjectHeadline'
 import PropTypes from 'prop-types'
 import Tags from './Tags'
 
-export default function Project({ title, country, description, image, tags }) {
+export default function Project({ data }) {
   return (
     <Card>
-      <Img alt='' src={image ?? 'https://source.unsplash.com/random'}></Img>
+      <Img alt='' src={data.image ?? 'https://source.unsplash.com/random'}></Img>
       <TagList>
-        {tags.map((tag, index) => (
+        {data.tags.map((tag, index) => (
           <Tags content={tag} key={index} />
         ))}
       </TagList>
-      <ProjectHeadline title={title} country={country} />
-      <Description>{description}</Description>
+      <ProjectHeadline title={data.title} country={data.country} />
+      <Description>{data.description}</Description>
     </Card>
   )
 }
 Project.propTypes = {
-  title: PropTypes.string.isRequired,
-  country: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  image: PropTypes.string,
+  data: PropTypes.object.isRequired,
 }
 
 const Card = styled.section`

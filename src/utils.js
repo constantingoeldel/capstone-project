@@ -1,5 +1,5 @@
 export function sortByTags(tags = [], source = [{}]) {
-  let projects = source
+  const projects = source
     .map((project) => {
       let index = 0
       project.applyingTags = new Set()

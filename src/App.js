@@ -4,6 +4,7 @@ import mockData from './db.json'
 import TagCluster from './components/TagCluster'
 import { sortByTags, filterBySearch } from './utils'
 import Search from './components/Search'
+import Counter from './components/Counter'
 
 export default function App() {
   const [selectedTags, setSelectedTags] = useState([])
@@ -15,10 +16,8 @@ export default function App() {
   return (
     <>
       <Search onSearch={onSearch} />
+      <Counter firstInt={projects.length} secondInt={mockData.projects.length} />
       <TagCluster tags={mockData.tags} onTagClick={onTagClick} />
-      <p>
-        {projects.length} out of {mockData.projects.length} Projects fit your search
-      </p>
       {projects.map((project, index) => (
         <Project key={index} data={project} />
       ))}

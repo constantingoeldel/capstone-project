@@ -1,3 +1,5 @@
+import fuzzysearch from 'fuzzysearch'
+
 export function sortByTags(tags = [], source = [{}]) {
   let projects = source
     .map((project) => {
@@ -15,4 +17,12 @@ export function sortByTags(tags = [], source = [{}]) {
     )
     .filter((project) => tags.length === 0 || project.applyingTags.size > 0)
   return projects
+}
+export function filterBySearch(event, source) {
+  return source.projects.filter(
+    (project) =>
+      fuzzysearch(event.target.value, project.title) ||
+      fuzzysearch(event.target.value, project.country) ||
+      fuzzysearch(event.target.value, project.description) === true
+  )
 }

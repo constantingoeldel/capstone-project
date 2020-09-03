@@ -16,7 +16,9 @@ export default function App() {
     <>
       <Search onSearch={onSearch} />
       <TagCluster tags={mockData.tags} onTagClick={onTagClick} />
-      <p>There are {projects.length} Projects fitting your search</p>
+      <p>
+        {projects.length} out of {mockData.projects.length} Projects fit your search
+      </p>
       {projects.map((project, index) => (
         <Project key={index} data={project} />
       ))}

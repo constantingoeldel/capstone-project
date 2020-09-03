@@ -13,10 +13,6 @@ export default function App() {
   useEffect(() => {
     setProjects(sortByTags(selectedTags, searchTerm))
   }, [selectedTags, searchTerm])
-
-  // useEffect(() => {
-  //   setProjects(searchTerm)
-  // }, [searchTerm])
   return (
     <>
       <Search onSearch={onSearch} />

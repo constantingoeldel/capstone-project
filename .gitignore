@@ -10,6 +10,8 @@
 /cypress/integration/examples
 # production
 /build
+/.vscode
+.eslintignore
 
 # misc
 .DS_Store

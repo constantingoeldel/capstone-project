@@ -18,7 +18,10 @@ export function sortByTags(tags = [], source = [{}]) {
     .filter((project) => tags.length === 0 || project.applyingTags.size > 0)
   return projects
 }
-export function filterBySearch(event, source) {
+export function filterBySearch(
+  event = { target: { value: '' } },
+  source = { projects: [{ title: '', country: '', description: '' }] }
+) {
   return source.projects.filter(
     (project) =>
       fuzzysearch(event.target.value, project.title) ||

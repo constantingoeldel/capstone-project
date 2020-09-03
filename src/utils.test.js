@@ -1,5 +1,5 @@
 import mockData from './db.json'
-import { sortByTags } from './utils'
+import { sortByTags, filterBySearch } from './utils'
 const tags = ['Leisure', 'Sport', 'People in need', 'Software Development']
 const tags2 = ['Non-Profit', 'For-Profit', 'Social Business', 'Technology', 'Food & Drink']
 const allTags = mockData.tags
@@ -52,7 +52,7 @@ const expectedResult = [
   },
 ]
 describe('test sorting function', () => {
-  it('always returnes something', () => {
+  it('always returns something', () => {
     expect(sortByTags([], [{}])).toBeDefined()
     expect(sortByTags(tags, [{}])).toBeDefined()
     expect(sortByTags(undefined, undefined)).toBeDefined()
@@ -80,5 +80,37 @@ describe('test sorting function', () => {
       sortByTags([], mockData.projects)[0].applyingTags.size -
         sortByTags([], mockData.projects)[1].applyingTags.size
     ).toBeGreaterThanOrEqual(0)
+  })
+})
+describe('Searching', () => {
+  it('Always returns something', () => {
+    expect(filterBySearch()).toBeDefined()
+    // expect(filterBySearch(tags, [{}])).toBeDefined()
+    // expect(filterBySearch(undefined, undefined)).toBeDefined()
+  })
+  it('Filters countries correctly', () => {
+    expect(filterBySearch({ target: { value: 'LIB' } }, mockData)).toEqual([
+      {
+        title: 'Never Refuse Refuge',
+        country: 'LIB',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tempus erat at urna semper tempus. Cras turpis, at luctus elit',
+        image: '/images/refugees.jpg',
+        tags: ['Social Business', 'In-Person-Support', 'People in need'],
+        applyingTags: new Set([]),
+      },
+    ])
+  })
+  it('Filters all text correctly', () => {
+    expect(filterBySearch({ target: { value: 'qrtuiopacn' } }, mockData)).toEqual([
+      {
+        country: 'SE',
+        description:
+          'pharetra magna vestibulum aliquet ultrices erat tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque',
+        title: 'Five Minutes to Live',
+        tags: ['Social Business', 'Food & Drink'],
+        applyingTags: new Set([]),
+      },
+    ])
   })
 })

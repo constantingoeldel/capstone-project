@@ -13,11 +13,7 @@ export default function Search({ onSearch }) {
   )
   function resetInput(event) {
     event.target.form.input.value = ''
-    onSearch({
-      target: {
-        value: '',
-      },
-    })
+    onSearch()
   }
 }
 

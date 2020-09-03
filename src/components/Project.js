@@ -19,7 +19,13 @@ export default function Project({ data }) {
   )
 }
 Project.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.shape({
+    tags: PropTypes.array.isRequired,
+    country: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    image: PropTypes.string,
+  }),
 }
 
 const Card = styled.section`

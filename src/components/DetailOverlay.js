@@ -78,7 +78,6 @@ const TagList = styled.ul`
 `
 const Headline = styled.section`
   display: flex;
-  z-z-index: 200;
   justify-content: space-between;
 `
 const H3 = styled.h3`

@@ -28,9 +28,11 @@ export default function App() {
   )
   function showDetails(project) {
     setDetailedProject(project)
+    document.body.classList.add('overlay')
   }
   function hideDetails() {
     setDetailedProject(null)
+    document.body.classList.remove('overlay')
   }
   function onTagClick(tag) {
     let set = new Set(selectedTags)

@@ -4,9 +4,9 @@ import ProjectHeadline from './ProjectHeadline'
 import PropTypes from 'prop-types'
 import Tags from './Tags'
 
-export default function Project({ data }) {
+export default function Project({ data, onClick }) {
   return (
-    <Card>
+    <Card onClick={() => onClick(data)}>
       <Img alt='' src={data.image ?? 'https://source.unsplash.com/random'}></Img>
       <TagList>
         {data.tags.map((tag, index) => (

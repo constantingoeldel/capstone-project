@@ -6,9 +6,7 @@ export default function Search({ onSearch }) {
   return (
     <Form onSubmit={(event) => event.preventDefault()}>
       <Input name='input' placeholder='Search for Projects' onChange={onSearch} />
-      <Button type='button' onClick={resetInput}>
-        Clear
-      </Button>
+      <Button onClick={resetInput}>Clear</Button>
     </Form>
   )
   function resetInput(event) {

@@ -3,10 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { ReactComponent as Plus } from '../icons/plus.svg'
 
-export default function Detail({
-  title,
-  content = 'If you are reading this, something must have gone wrong',
-}) {
+export default function Detail({ title, content }) {
   const [isExpanded, setIsExpanded] = useState(false)
   return (
     <>

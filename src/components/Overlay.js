@@ -21,12 +21,11 @@ export default function Overlay({ project, onBack }) {
           <Tags content={tag} key={tag} />
         ))}
       </TagList>
-
       <Contributors contributors={project.contributors} />
-      <Detail title='Mission' content={project.mission} />
-      <Detail title='About' content={project.about} />
-      <Detail title='Updates' content={project.updates} />
-      <Detail title='Comments' content={project.comments} />
+      {project.details &&
+        project.details.map((detail) => (
+          <Detail title={detail.title} content={detail.information} />
+        ))}
       <Description>{project.description}</Description>
     </OverlaySection>
   )

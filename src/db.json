@@ -24,10 +24,12 @@
         { "name": "Janet", "picture": "/images/refugees.jpg" },
         { "name": "James", "picture": "/images/wildfire.jpg" }
       ],
-      "mission": "We bring everybody closer together",
-      "about": "We are very goofy",
-      "updates": "Basically no progress",
-      "comments": "I hate my life"
+      "details": [
+        { "title": "mission", "information": "We bring everybody closer together" },
+        { "title": "about", "information": "We are very goofy" },
+        { "title": "updates", "information": "Basically no progress" },
+        { "title": "comments", "information": "I hate my life" }
+      ]
     },
     {
       "title": "ZeroClimate",

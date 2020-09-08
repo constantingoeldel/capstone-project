@@ -10,7 +10,7 @@ export default function Project({ data, onClick }) {
       <Img alt='' src={data.image ?? 'https://source.unsplash.com/random'}></Img>
       <TagList>
         {data.tags.map((tag, index) => (
-          <Tags content={tag} key={index} />
+          <Tags content={tag} key={tag} />
         ))}
       </TagList>
       <ProjectHeadline title={data.title} country={data.country} />

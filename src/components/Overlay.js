@@ -18,7 +18,7 @@ export default function Overlay({ project, onBack }) {
       <Img alt='' src={project.image ?? 'https://source.unsplash.com/random'}></Img>
       <TagList>
         {project.tags.map((tag, index) => (
-          <Tags content={tag} key={index} />
+          <Tags content={tag} key={tag} />
         ))}
       </TagList>
 

@@ -11,7 +11,7 @@ export default function Contributors({
   return (
     <ImageList>
       {contributors.map((contributor, index) => (
-        <Img key={index} alt={contributor.name} src={contributor.picture} />
+        <Img key={contributor.name} alt={contributor.name} src={contributor.picture} />
       ))}
     </ImageList>
   )

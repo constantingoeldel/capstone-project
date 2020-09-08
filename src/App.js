@@ -24,7 +24,7 @@ export default function App() {
       <Counter firstInt={projects.length} secondInt={mockData.projects.length} />
       <TagCluster tags={mockData.tags} onTagClick={onTagClick} />
       {projects.map((project, index) => (
-        <Project key={index} data={project} onClick={toggleDetailOverlay} />
+        <Project key={project.title} data={project} onClick={toggleDetailOverlay} />
       ))}
     </>
   )

@@ -12,41 +12,26 @@ export default function App() {
   const [projects, setProjects] = useState([])
   const [searchTerm, setSearchTerm] = useState(mockData.projects)
   const [detailedProject, setDetailedProject] = useState(null)
-  const [scrollPosition, setScrollPosition] = useState()
 
   useEffect(() => {
     setProjects(sortByTags(selectedTags, searchTerm))
   }, [selectedTags, searchTerm])
 
-  useEffect(() => {
-    window.scrollTo(0, scrollPosition)
-    console.log('scroll to', scrollPosition)
-  }, [hideDetails, scrollPosition])
+  return (
+    <>
+      {detailedProject && <DetailOverlay project={detailedProject} onBack={toggleDetailOverlay} />}
+      <Search onSearch={onSearch} />
+      <Counter firstInt={projects.length} secondInt={mockData.projects.length} />
+      <TagCluster tags={mockData.tags} onTagClick={onTagClick} />
+      {projects.map((project, index) => (
+        <Project key={index} data={project} onClick={toggleDetailOverlay} />
+      ))}
+    </>
+  )
 
-  if (detailedProject) {
-    return <DetailOverlay project={detailedProject} onBack={hideDetails} />
-  } else {
-    return (
-      <>
-        <Search onSearch={onSearch} />
-        <Counter firstInt={projects.length} secondInt={mockData.projects.length} />
-        <TagCluster tags={mockData.tags} onTagClick={onTagClick} />
-        {projects.map((project, index) => (
-          <Project key={index} data={project} onClick={showDetails} />
-        ))}
-      </>
-    )
-  }
-
-  function showDetails(project) {
-    setDetailedProject(project)
-    console.log(window.scrollY)
-    setScrollPosition(window.scrollY)
-    document.body.classList.add('overlay')
-  }
-  function hideDetails() {
-    setDetailedProject(null)
-    document.body.classList.remove('overlay')
+  function toggleDetailOverlay(project) {
+    setDetailedProject(detailedProject ? null : project)
+    document.body.classList.toggle('overlay')
   }
   function onTagClick(tag) {
     let set = new Set(selectedTags)

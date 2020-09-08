@@ -7,12 +7,12 @@ import { ReactComponent as Share } from '../icons/share.svg'
 import Contributors from './Contributors'
 import Detail from './Detail'
 
-export default function DetailOverlay({ project, onBack }) {
+export default function Overlay({ project, onBack }) {
   return (
-    <Overlay>
+    <OverlaySection>
       <Headline>
         <ArrowStyled onClick={onBack} />
-        <H3>{project.title}</H3>
+        <Title>{project.title}</Title>
         <ShareStyled />
       </Headline>
       <Img alt='' src={project.image ?? 'https://source.unsplash.com/random'}></Img>
@@ -28,21 +28,21 @@ export default function DetailOverlay({ project, onBack }) {
       <Detail title='Updates' content={project.updates} />
       <Detail title='Comments' content={project.comments} />
       <Description>{project.description}</Description>
-    </Overlay>
+    </OverlaySection>
   )
 }
 
-DetailOverlay.propTypes = {
+Overlay.propTypes = {
   project: PropTypes.shape({
     tags: PropTypes.array.isRequired,
     country: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     image: PropTypes.string,
-    mission: PropTypes.object.isRequired,
-    about: PropTypes.object.isRequired,
-    updates: PropTypes.object.isRequired,
-    comments: PropTypes.object.isRequired,
+    mission: PropTypes.string.isRequired,
+    about: PropTypes.string.isRequired,
+    updates: PropTypes.string.isRequired,
+    comments: PropTypes.string.isRequired,
     contributors: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string.isRequired,
@@ -51,7 +51,7 @@ DetailOverlay.propTypes = {
     ),
   }),
 }
-const Overlay = styled.section`
+const OverlaySection = styled.section`
   position: fixed;
   overflow-y: scroll;
   top: 20px;
@@ -93,12 +93,14 @@ const Headline = styled.section`
   top: 20px;
   z-index: 100;
 `
-const H3 = styled.h3`
+const Title = styled.h3`
   font-weight: 300;
   font-size: 170%;
   padding: 10px 10px 5px 10px;
   margin: 0;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 const ArrowStyled = styled(Arrow)`
   margin: 15px;

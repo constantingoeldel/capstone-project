@@ -12,7 +12,7 @@ export default function Detail({
     <>
       <Title onClick={toggleDetail}>
         <PlusStyled />
-        <H3>{title}</H3>
+        <Headline>{title}</Headline>
       </Title>
       <Body isExpanded={isExpanded}>{content}</Body>
     </>
@@ -39,7 +39,7 @@ const Body = styled.p`
   margin: 10px;
   display: ${(props) => (props.isExpanded ? 'block' : 'none')};
 `
-const H3 = styled.h3`
+const Headline = styled.h3`
   font-weight: 300;
   font-size: 170%;
   padding: 5px 10px 5px 5px;

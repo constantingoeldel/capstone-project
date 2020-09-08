@@ -5,7 +5,7 @@ import TagCluster from './components/TagCluster'
 import { sortByTags, filterBySearch } from './utils'
 import Search from './components/Search'
 import Counter from './components/Counter'
-import DetailOverlay from './components/DetailOverlay'
+import Overlay from './components/Overlay'
 
 export default function App() {
   const [selectedTags, setSelectedTags] = useState([])
@@ -19,7 +19,7 @@ export default function App() {
 
   return (
     <>
-      {detailedProject && <DetailOverlay project={detailedProject} onBack={toggleDetailOverlay} />}
+      {detailedProject && <Overlay project={detailedProject} onBack={toggleDetailOverlay} />}
       <Search onSearch={onSearch} />
       <Counter firstInt={projects.length} secondInt={mockData.projects.length} />
       <TagCluster tags={mockData.tags} onTagClick={onTagClick} />

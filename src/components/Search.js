@@ -37,7 +37,7 @@ const Input = styled.input`
   box-sizing: border-box;
   width: 70%;
 `
-const Button = styled.button`
+const Button = styled.button.attrs((props) => ({ type: 'button' }))`
   background-color: #1b998b;
   border: 0;
   outline: 0;

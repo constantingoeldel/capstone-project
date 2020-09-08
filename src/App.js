@@ -12,14 +12,15 @@ export default function App() {
   const [projects, setProjects] = useState([])
   const [searchTerm, setSearchTerm] = useState(mockData.projects)
   const [detailedProject, setDetailedProject] = useState(null)
-
+  
   useEffect(() => {
     setProjects(sortByTags(selectedTags, searchTerm))
   }, [selectedTags, searchTerm])
-
+  
   return (
     <>
       {detailedProject && <Overlay project={detailedProject} onBack={toggleDetailOverlay} />}
+
       <Search onSearch={onSearch} />
       <Counter firstInt={projects.length} secondInt={mockData.projects.length} />
       <TagCluster tags={mockData.tags} onTagClick={onTagClick} />

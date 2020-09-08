@@ -17,6 +17,7 @@ describe('Project', () => {
     cy.get('button').click()
     cy.get('input').should('have.value', '')
   })
+
   it('filters and search work together', () => {
     cy.get('input').type('smth')
     cy.get('.TagCluster__TagList-x84l3-0 > :nth-child(4)').click()

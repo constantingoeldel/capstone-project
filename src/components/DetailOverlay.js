@@ -27,6 +27,7 @@ export default function DetailOverlay({ project, onBack }) {
       <Detail title='About' content={project.about} />
       <Detail title='Updates' content={project.updates} />
       <Detail title='Comments' content={project.comments} />
+      <Description>{project.description}</Description>
     </Overlay>
   )
 }
@@ -42,6 +43,12 @@ DetailOverlay.propTypes = {
     about: PropTypes.object.isRequired,
     updates: PropTypes.object.isRequired,
     comments: PropTypes.object.isRequired,
+    contributors: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        picture: PropTypes.string.isRequired,
+      })
+    ),
   }),
 }
 const Overlay = styled.section`
@@ -57,6 +64,7 @@ const Overlay = styled.section`
   padding: 10px;
 `
 const Img = styled.img`
+  margin-top: 50px;
   width: 100%;
   height: 250px;
   object-fit: cover;
@@ -79,19 +87,33 @@ const TagList = styled.ul`
 const Headline = styled.section`
   display: flex;
   justify-content: space-between;
+  position: fixed;
+  background-color: white;
+  width: 100vw;
+  top: 20px;
+  z-index: 100;
 `
 const H3 = styled.h3`
   font-weight: 300;
   font-size: 170%;
-  padding: 5px 10px 5px 15px;
+  padding: 10px 10px 5px 10px;
   margin: 0;
   white-space: nowrap;
 `
 const ArrowStyled = styled(Arrow)`
-  margin: 10px;
+  margin: 15px;
   cursor: pointer;
 `
 const ShareStyled = styled(Share)`
-  margin: 10px;
+  margin: 15px;
+  width: 25px;
+  height: 25px;
+  margin-right: 25px;
   cursor: pointer;
+`
+const Description = styled.p`
+  font-weight: 300;
+  font-size: 120%;
+  padding: 10px 10px 20px 20px;
+  margin: 0;
 `

@@ -2,7 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-export default function Contributors({ contributors }) {
+export default function Contributors({
+  contributors = [
+    { name: 'N/A', picture: '/images/picture-missing.jpg' },
+    { name: 'N/A', picture: '/images/picture-missing.jpg' },
+  ],
+}) {
   return (
     <ImageList>
       {contributors.map((contributor, index) => (
@@ -11,6 +16,15 @@ export default function Contributors({ contributors }) {
     </ImageList>
   )
 }
+Contributors.propTypes = {
+  contributors: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      picture: PropTypes.string,
+    })
+  ),
+}
+
 const ImageList = styled.section`
   display: flex;
   overflow: scroll;

@@ -3,7 +3,10 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { ReactComponent as Plus } from '../icons/plus.svg'
 
-export default function Detail({ title, content }) {
+export default function Detail({
+  title,
+  content = 'If you are reading this, something must have gone wrong',
+}) {
   const [isExpanded, setIsExpanded] = useState(false)
   return (
     <>
@@ -17,6 +20,11 @@ export default function Detail({ title, content }) {
   function toggleDetail() {
     setIsExpanded(!isExpanded)
   }
+}
+
+Detail.propTypes = {
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
 }
 const PlusStyled = styled(Plus)`
   margin: 10px;

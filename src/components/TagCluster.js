@@ -7,14 +7,15 @@ export default function TagCluster({ tags, onTagClick }) {
   return (
     <TagList>
       {tags.map((tag, index) => (
-        <Tags key={tag} content={tag} onClick={selectTag} />
+        <Tags
+          key={tag.text}
+          content={tag.text}
+          onClick={() => onTagClick(tag)}
+          isSelected={tag.selected}
+        />
       ))}
     </TagList>
   )
-  function selectTag(event, tag) {
-    event.target.classList.toggle('active')
-    onTagClick(tag)
-  }
 }
 
 TagCluster.propTypes = {

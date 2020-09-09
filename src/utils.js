@@ -1,12 +1,15 @@
 import fuzzysearch from 'fuzzysearch'
 
 export function sortByTags(tags = [], source = [{}]) {
+  const selectedTags = tags.map((tag) => tag.selected && tag.text)
   const projects = source
     .map((project) => {
-      project.applyingTags = project.tags.filter((projectTag, index) => tags.includes(projectTag))
+      project.applyingTags = project.tags.filter((projectTag) => selectedTags.includes(projectTag))
       return project
     })
-    .filter((project) => tags.length === 0 || project.applyingTags.length > 0)
+    .filter(
+      (project) => tags.map((tag) => tag.selected).length === 0 || project.applyingTags.length > 0
+    )
     .sort(
       (firstProject, secondProject) =>
         secondProject.applyingTags.length - firstProject.applyingTags.length

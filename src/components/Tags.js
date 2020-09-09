@@ -1,15 +1,25 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
+import { useSpring, animated, config } from 'react-spring'
 
-export default function Tags({ content, onClick = () => {} }) {
-  return <Tag onClick={(event) => onClick(event, content)}>{content}</Tag>
+export default function Tags({ content, onClick, isSelected }) {
+  const colorAnimation = useSpring({
+    backgroundColor: isSelected ? `#1B998B` : `#2e2e3a`,
+    config: config.wobbly,
+  })
+  console.log('rendered')
+  return (
+    <Tag style={colorAnimation} onClick={onClick}>
+      {content}
+    </Tag>
+  )
 }
 Tags.propTypes = {
   content: PropTypes.string.isRequired,
   onClick: PropTypes.func,
 }
-const Tag = styled.li`
+const Tag = styled(animated.li)`
   display: inline-block;
   white-space: nowrap;
   color: white;

@@ -7,7 +7,7 @@ export default function TagCluster({ tags, onTagClick }) {
   return (
     <TagList>
       {tags.map((tag, index) => (
-        <Tags key={index} content={tag} onClick={selectTag} />
+        <Tags key={tag} content={tag} onClick={selectTag} />
       ))}
     </TagList>
   )

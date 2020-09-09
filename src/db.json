@@ -19,7 +19,17 @@
       "country": "AUS",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tempus erat at urna semper tempus. Cras euismod semper turpis, at luctus elit dignissim non. Curabitur id arcu in justo pellentesque.",
       "image": "/images/wildfire.jpg",
-      "tags": ["Social Business", "In-Person-Support", "Non-Profit"]
+      "tags": ["Social Business", "In-Person-Support", "Non-Profit"],
+      "contributors": [
+        { "name": "Janet", "picture": "/images/refugees.jpg" },
+        { "name": "James", "picture": "/images/wildfire.jpg" }
+      ],
+      "details": [
+        { "title": "mission", "information": "We bring everybody closer together" },
+        { "title": "about", "information": "We are very goofy" },
+        { "title": "updates", "information": "Basically no progress" },
+        { "title": "comments", "information": "I hate my life" }
+      ]
     },
     {
       "title": "ZeroClimate",

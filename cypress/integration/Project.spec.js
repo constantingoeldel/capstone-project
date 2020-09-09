@@ -5,6 +5,25 @@ describe('Project', () => {
     cy.viewport(375, 667)
     cy.visit('http://localhost:3000')
   })
+  it('displays the search bar', () => {
+    cy.get('input')
+  })
+  it('gives correct result', () => {
+    cy.get('input').type('LIB')
+    cy.get('#root > :nth-child(4)').should('contain', 'LIB')
+  })
+  it('clears input', () => {
+    cy.get('input').type('smth').should('have.value', 'smth')
+    cy.get('button').click()
+    cy.get('input').should('have.value', '')
+  })
+
+  it('filters and search work together', () => {
+    cy.get('input').type('smth')
+    cy.get('.TagCluster__TagList-x84l3-0 > :nth-child(4)').click()
+    cy.get('.TagCluster__TagList-x84l3-0 > :nth-child(10)').click()
+    cy.get('.Project__Card-nm2m85-0').should('have.length', 3)
+  })
   it('Displays the headlines correctly', () => {
     cy.contains('ZeroClimate')
     cy.contains('Take a breather')
@@ -52,6 +71,6 @@ describe('Project', () => {
     cy.get('.TagCluster__TagList-x84l3-0 > :nth-child(2)').click()
     cy.get('.TagCluster__TagList-x84l3-0 > :nth-child(4)').click()
     cy.get('.TagCluster__TagList-x84l3-0 > :nth-child(10)').click()
-    cy.get('#root > :nth-child(3)').should('contain', 'RU | Confess')
+    cy.get('#root > :nth-child(4)').should('contain', 'RU | Confess')
   })
 })

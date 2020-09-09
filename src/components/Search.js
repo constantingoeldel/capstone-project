@@ -6,9 +6,7 @@ export default function Search({ onSearch }) {
   return (
     <Form onSubmit={(event) => event.preventDefault()}>
       <Input name='input' placeholder='Search for Projects' onChange={onSearch} />
-      <Button type='button' onClick={resetInput}>
-        Clear
-      </Button>
+      <Button onClick={resetInput}>Clear</Button>
     </Form>
   )
   function resetInput(event) {
@@ -37,7 +35,9 @@ const Input = styled.input`
   box-sizing: border-box;
   width: 70%;
 `
-const Button = styled.button`
+
+const Button = styled.button.attrs((props) => ({ type: 'button' }))`
+
   background-color: #1b998b;
   border: 0;
   outline: 0;

@@ -9,7 +9,7 @@ export default function Detail({ title, content }) {
     <>
       <Title onClick={toggleDetail}>
         <PlusStyled />
-        <Headline>{title}</Headline>
+        <Headline>{title.charAt(0).toUpperCase() + title.slice(1)}</Headline>
       </Title>
       <Body isExpanded={isExpanded}>{content}</Body>
     </>
@@ -32,13 +32,14 @@ const Title = styled.section`
   align-items: center;
 `
 const Body = styled.p`
-  font-size: 110%;
-  margin: 10px;
+  font-weight: 300;
+  padding: 10px 10px 20px 15px;
+  margin: 0;
   display: ${(props) => (props.isExpanded ? 'block' : 'none')};
 `
 const Headline = styled.h3`
   font-weight: 300;
-  font-size: 170%;
+  font-size: 150%;
   padding: 5px 10px 5px 5px;
   margin: 0;
   white-space: nowrap;

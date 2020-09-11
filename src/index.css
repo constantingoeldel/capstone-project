@@ -9,6 +9,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 body.overlay {
-  height: 100vh;
+  height: calc(100vh-20px);
   overflow-y: hidden;
 }

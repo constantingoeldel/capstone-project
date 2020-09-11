@@ -8,25 +8,36 @@ import Counter from './components/Counter'
 import Overlay from './components/Overlay'
 
 export default function App() {
-  const [selectedTags, setSelectedTags] = useState([])
-  const [projects, setProjects] = useState([])
+  const [tags, setTags] = useState(null)
+  const [projects, setProjects] = useState(null)
   const [searchTerm, setSearchTerm] = useState(mockData.projects)
   const [detailedProject, setDetailedProject] = useState(null)
-  
+
   useEffect(() => {
-    setProjects(sortByTags(selectedTags, searchTerm))
-  }, [selectedTags, searchTerm])
-  
+    fetch('http://localhost:4000/api/projects')
+      .then((res) => res.json())
+      .catch((error) => console.log(error))
+      .then((projects) => setProjects(projects))
+    fetch('http://localhost:4000/api/tags')
+      .then((res) => res.json())
+      .catch((error) => console.log(error))
+      .then((tags) => setTags(tags))
+  }, [])
+
+  // useEffect(() => {
+  //   setProjects(sortByTags(selectedTags, searchTerm))
+  // }, [selectedTags, searchTerm])
+
   return (
     <>
       {detailedProject && <Overlay project={detailedProject} onBack={toggleDetailOverlay} />}
-
       <Search onSearch={onSearch} />
-      <Counter firstInt={projects.length} secondInt={mockData.projects.length} />
-      <TagCluster tags={mockData.tags} onTagClick={onTagClick} />
-      {projects.map((project, index) => (
-        <Project key={project.title} data={project} onClick={toggleDetailOverlay} />
-      ))}
+      {projects && <Counter firstInt={projects.length} secondInt={mockData.projects.length} />}
+      {projects && <TagCluster tags={tags} /*onTagClick={onTagClick}*/ />}
+      {projects &&
+        projects.map((project) => (
+          <Project key={project._id} project={project} onClick={toggleDetailOverlay} />
+        ))}
     </>
   )
 
@@ -34,11 +45,11 @@ export default function App() {
     setDetailedProject(detailedProject ? null : project)
     document.body.classList.toggle('overlay')
   }
-  function onTagClick(tag) {
-    let set = new Set(selectedTags)
-    set = set.delete(tag) ? set : set.add(tag)
-    setSelectedTags([...set])
-  }
+  // function onTagClick(tag) {
+  //   let set = new Set(selectedTags)
+  //   set = set.delete(tag) ? set : set.add(tag)
+  //   setSelectedTags([...set])
+  // }
   function onSearch(event) {
     setSearchTerm(filterBySearch(event, mockData))
   }

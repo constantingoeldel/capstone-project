@@ -68,7 +68,7 @@ export const TagList = styled.ul`
     background-color: #1b998b;
     opacity: 0.6;
   }
-  & > li .active {
+  & > li.active {
     opacity: 1;
   }
 `

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 export default function Tag({ tag, onClick = () => {} }) {
   return (
-    <TagStyled active={tag.applies} onClick={(event) => onClick(event, tag)}>
+    <TagStyled className={tag.applies ? 'active' : null} onClick={onClick}>
       {tag.text}
     </TagStyled>
   )

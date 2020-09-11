@@ -3,11 +3,11 @@ import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 import Tag from './Tag'
 
-export default function TagCluster({ tags, onTagClick }) {
+export default function TagCluster({ tags }) {
   return (
     <TagList>
       {tags.map((tag) => (
-        <Tag key={tag.text} tag={tag} onClick={onTagClick} />
+        <Tag key={tag.text} tag={tag} onClick={() => (tag.applies = true)} />
       ))}
     </TagList>
   )
@@ -25,7 +25,7 @@ TagCluster.propTypes = {
 
 const TagList = styled.ul`
   padding: 10px;
-  & > li .active {
+  & > li.active {
     background-color: #1b998b;
   }
 `

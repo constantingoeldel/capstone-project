@@ -10,8 +10,6 @@ import Overlay from './components/Overlay'
 export default function App() {
   const [tags, setTags] = useState(null)
   const [projects, setProjects] = useState(null)
-  const [searchTerm, setSearchTerm] = useState(mockData.projects)
-  const [detailedProject, setDetailedProject] = useState(null)
 
   useEffect(() => {
     fetch('http://localhost:4000/api/projects')
@@ -30,27 +28,25 @@ export default function App() {
 
   return (
     <>
-      {detailedProject && <Overlay project={detailedProject} onBack={toggleDetailOverlay} />}
-      <Search onSearch={onSearch} />
-      {projects && <Counter firstInt={projects.length} secondInt={mockData.projects.length} />}
-      {projects && <TagCluster tags={tags} /*onTagClick={onTagClick}*/ />}
+      <Search /*onSearch={onSearch}*/ />
+      {tags && <TagCluster tags={tags} />}
+      {projects && tags && <Counter firstInt={projects.length} secondInt={projects.length} />}
       {projects &&
-        projects.map((project) => (
-          <Project key={project._id} project={project} onClick={toggleDetailOverlay} />
-        ))}
+        projects.map((project) => project.showDetail && <Overlay project={project} />) &&
+        projects.map((project) => <Project key={project._id} project={project} />)}
     </>
   )
 
-  function toggleDetailOverlay(project) {
-    setDetailedProject(detailedProject ? null : project)
-    document.body.classList.toggle('overlay')
-  }
+  // function toggleDetailOverlay(project) {
+  //   setDetailedProject(detailedProject ? null : project)
+  //   document.body.classList.toggle('overlay')
+  // }
   // function onTagClick(tag) {
   //   let set = new Set(selectedTags)
   //   set = set.delete(tag) ? set : set.add(tag)
   //   setSelectedTags([...set])
   // }
-  function onSearch(event) {
-    setSearchTerm(filterBySearch(event, mockData))
-  }
+  // function onSearch(event) {
+  //   setSearchTerm(filterBySearch(event, mockData))
+  // }
 }

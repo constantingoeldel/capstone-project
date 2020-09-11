@@ -2,10 +2,10 @@ import React from 'react'
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 
-export default function Tag({ tag, onClick = () => {} }) {
+export default function Tag({ text, applies, onClick = () => {} }) {
   return (
-    <TagStyled className={tag.applies ? 'active' : null} onClick={onClick}>
-      {tag.text}
+    <TagStyled className={applies ? 'active' : null} onClick={onClick}>
+      {text}
     </TagStyled>
   )
 }

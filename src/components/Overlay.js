@@ -9,6 +9,7 @@ import Detail from './Detail'
 import { TagList } from './Project'
 
 export default function Overlay({ project, onBack }) {
+  console.log('this ')
   return (
     <OverlaySection>
       <Headline>
@@ -19,7 +20,7 @@ export default function Overlay({ project, onBack }) {
       <Img alt='' src={project.image ?? 'https://source.unsplash.com/random'}></Img>
       <TagList>
         {project.tags.map((tag) => (
-          <Tag tag={tag} key={tag.text} />
+          <Tag text={tag.text} applies={tag.applies} key={tag.text} />
         ))}
       </TagList>
       <Contributors contributors={project.contributors} />

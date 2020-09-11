@@ -3,11 +3,16 @@ import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 import Tag from './Tag'
 
-export default function TagCluster({ tags }) {
+export default function TagCluster({ tags, onTagClick }) {
   return (
     <TagList>
-      {tags.map((tag) => (
-        <Tag key={tag.text} tag={tag} onClick={() => (tag.applies = true)} />
+      {tags.map((tag, index) => (
+        <Tag
+          key={tag.text}
+          text={tag.text}
+          applies={tag.applies}
+          onClick={() => onTagClick(tag, index)}
+        />
       ))}
     </TagList>
   )

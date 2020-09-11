@@ -6,11 +6,11 @@ import Tag from './Tag'
 
 export default function Project({ project, onClick }) {
   return (
-    <Card onClick={() => onClick(project)}>
+    <Card onClick={onClick}>
       <Img alt='' src={project.image ?? 'https://source.unsplash.com/random'}></Img>
       <TagList>
         {project.tags.map((tag) => (
-          <Tag key={tag.text} tag={tag} />
+          <Tag key={tag.text} text={tag.text} applies={tag.applies} />
         ))}
       </TagList>
       <ProjectHeadline title={project.title} country={project.location.countrycode} />

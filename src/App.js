@@ -20,7 +20,18 @@ export default function App() {
       .catch((error) => console.log(error))
       .then((tags) => setTags(tags))
   }, [])
-
+  useEffect(
+    () =>
+      setProjects(
+        tags &&
+          projects &&
+          sortByTags(
+            tags.filter((tag) => tag.applies).map((tag) => tag.text),
+            projects
+          )
+      ),
+    [tags]
+  )
   // useEffect(() => {
   //   setProjects(sortByTags(selectedTags, searchTerm))
   // }, [selectedTags, searchTerm])
@@ -29,7 +40,7 @@ export default function App() {
     <>
       <Search /*onSearch={onSearch}*/ />
       {tags && <TagCluster tags={tags} onTagClick={onTagClick} />}
-      {projects && tags && <Counter firstInt={projects.length} secondInt={projects.length} />}
+
       {projects &&
         projects
           .slice(0, 20)

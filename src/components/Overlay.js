@@ -9,7 +9,6 @@ import Detail from './Detail'
 import { TagList } from './Project'
 
 export default function Overlay({ project, onBack }) {
-  console.log('this ')
   return (
     <OverlaySection>
       <Headline>

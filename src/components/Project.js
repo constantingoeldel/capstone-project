@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import Tag from './Tag'
 
 export default function Project({ project, onClick }) {
+  console.log('project')
   return (
     <Card onClick={onClick}>
       <Img alt='' src={project.image ?? 'https://source.unsplash.com/random'}></Img>

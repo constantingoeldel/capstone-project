@@ -3,12 +3,13 @@ import Project from './components/Project'
 import TagCluster from './components/TagCluster'
 import { sortByTags, filterBySearch } from './utils'
 import Search from './components/Search'
-import Counter from './components/Counter'
+// import Counter from './components/Counter'
 import Overlay from './components/Overlay'
 
 export default function App() {
   const [tags, setTags] = useState(null)
   const [projects, setProjects] = useState(null)
+  const [searchTerm, setSearchTerm] = useState(null)
 
   useEffect(() => {
     fetch('http://localhost:4000/api/projects')
@@ -20,6 +21,7 @@ export default function App() {
       .catch((error) => console.log(error))
       .then((tags) => setTags(tags))
   }, [])
+  //testen!
   useEffect(
     () =>
       setProjects(
@@ -32,17 +34,16 @@ export default function App() {
       ),
     [tags]
   )
-  // useEffect(() => {
-  //   setProjects(sortByTags(selectedTags, searchTerm))
-  // }, [selectedTags, searchTerm])
-
+  useEffect(() => setProjects(searchTerm && projects && filterBySearch(searchTerm, projects)), [
+    searchTerm,
+  ])
   return (
     <>
-      <Search /*onSearch={onSearch}*/ />
+      <Search onSearch={onSearch} />
       {tags && <TagCluster tags={tags} onTagClick={onTagClick} />}
-
       {projects &&
         projects
+          .filter((project) => project.accordingToSearchTerms)
           .slice(0, 20)
           .map((project, index) => (
             <Project
@@ -76,12 +77,8 @@ export default function App() {
       ...tags.slice(index + 1),
     ])
   }
-  // function onSearch(event) {
-  //   setSearchTerm(filterBySearch(event, mockData))
-  // }
+  function onSearch(event) {
+    setSearchTerm(event.target.value)
+    console.log('search', searchTerm)
+  }
 }
-//[
-//   ...tags.slice(0, index),
-//   { ...tag, selected: !tag.selected },
-//   ...tags.slice(index + 1),
-// ]

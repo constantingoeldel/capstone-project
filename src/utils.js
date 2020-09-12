@@ -14,14 +14,15 @@ export function sortByTags(selectedTags = [], source) {
   return projects
 }
 
-export function filterBySearch(
-  event = { target: { value: '' } },
-  source = { projects: [{ title: '', country: '', description: '' }] }
-) {
-  return source.projects.filter(
-    (project) =>
-      fuzzysearch(event.target.value, project.title) ||
-      fuzzysearch(event.target.value, project.country) ||
-      fuzzysearch(event.target.value, project.description)
-  )
+export function filterBySearch(searchTerm, source) {
+  const projects = source.map((item) => {
+    item.accordingToSearchTerms = fuzzysearch(searchTerm, item.title)
+    // fuzzysearch(searchTerm, project.description) ||
+    // fuzzysearch(searchTerm, project.location.country) ||
+    // fuzzysearch(searchTerm, project.location.city) ||
+    // fuzzysearch(searchTerm, project.location.countrycode) ||
+    // fuzzysearch(searchTerm, project.details.mission)
+    return item
+  })
+  return projects
 }

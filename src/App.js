@@ -43,7 +43,7 @@ export default function App() {
       {tags && <TagCluster tags={tags} onTagClick={onTagClick} />}
       {projects &&
         projects
-          .filter((project) => project.accordingToSearchTerms)
+          .filter((project) => project.accordingToSearchTerms ?? project)
           .slice(0, 20)
           .map((project, index) => (
             <Project

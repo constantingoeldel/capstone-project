@@ -16,12 +16,13 @@ export function sortByTags(selectedTags = [], source) {
 
 export function filterBySearch(searchTerm, source) {
   const projects = source.map((item) => {
-    item.accordingToSearchTerms = fuzzysearch(searchTerm, item.title)
-    // fuzzysearch(searchTerm, project.description) ||
-    // fuzzysearch(searchTerm, project.location.country) ||
-    // fuzzysearch(searchTerm, project.location.city) ||
-    // fuzzysearch(searchTerm, project.location.countrycode) ||
-    // fuzzysearch(searchTerm, project.details.mission)
+    item.accordingToSearchTerms =
+      fuzzysearch(searchTerm, item.title) ||
+      fuzzysearch(searchTerm, item.description) ||
+      fuzzysearch(searchTerm, item.location.country) ||
+      fuzzysearch(searchTerm, item.location.city) ||
+      fuzzysearch(searchTerm, item.location.countrycode) ||
+      console.log(item)
     return item
   })
   return projects

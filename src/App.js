@@ -24,7 +24,8 @@ export default function App() {
   useEffect(
     () =>
       setProjects(
-        tags &&
+        (projects) =>
+          tags &&
           projects &&
           sortByTags(
             tags.filter((tag) => tag.applies).map((tag) => tag.text),
@@ -33,9 +34,10 @@ export default function App() {
       ),
     [tags]
   )
-  useEffect(() => setProjects(searchTerm && projects && filterBySearch(searchTerm, projects)), [
-    searchTerm,
-  ])
+  useEffect(
+    () => setProjects((projects) => searchTerm && projects && filterBySearch(searchTerm, projects)),
+    [searchTerm]
+  )
   return (
     <>
       <Search onSearch={onSearch} />

@@ -21,7 +21,6 @@ export default function App() {
       .catch((error) => console.log(error))
       .then((tags) => setTags(tags))
   }, [])
-  //testen!
   useEffect(
     () =>
       setProjects(

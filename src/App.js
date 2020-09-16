@@ -56,13 +56,18 @@ export default function App() {
         projects.map(
           (project, index) =>
             project.expanded && (
-              <Overlay project={project} onBack={() => toggleDetailOverlay(project, index)} />
+              <Overlay
+                key={project._id}
+                project={project}
+                onBack={() => toggleDetailOverlay(project, index)}
+              />
             )
         )}
     </>
   )
   // Mehr Anzeigen button einbauen
   function toggleDetailOverlay(project, index) {
+    console.log('called')
     setProjects([
       ...projects.slice(0, index),
       { ...project, expanded: !project.expanded },

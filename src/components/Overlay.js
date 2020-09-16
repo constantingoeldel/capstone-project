@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSpring, animated, config } from 'react-spring'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import Tag from './Tag'
@@ -9,10 +10,20 @@ import Detail from './Detail'
 import { TagList } from './Project'
 
 export default function Overlay({ project, onBack }) {
+  const [expanded, setExpanded] = useState(null)
+  const slideUp = useSpring({
+    config: config.stiff,
+    top: expanded ? '3vh' : '100vh',
+    onRest: () => expanded === false && onBack(),
+  })
+  useEffect(() => {
+    setExpanded((expanded) => true)
+  }, [])
+
   return (
-    <OverlaySection>
-      <Headline>
-        <ArrowStyled onClick={onBack} />
+    <OverlaySection style={slideUp}>
+      <Headline style={slideUp}>
+        <ArrowStyled onClick={() => setExpanded(false)} />
         <Title>{project.title}</Title>
         <ShareStyled />
       </Headline>
@@ -60,10 +71,9 @@ Overlay.propTypes = {
     ),
   }),
 }
-const OverlaySection = styled.section`
+const OverlaySection = styled(animated.section)`
   position: fixed;
   overflow-y: scroll;
-  top: 20px;
   height: 100vh;
   width: 100vw;
   z-index: 99;
@@ -79,13 +89,12 @@ const Img = styled.img`
   object-fit: cover;
   border-radius: 10px;
 `
-const Headline = styled.section`
+const Headline = styled(animated.section)`
   display: flex;
   justify-content: space-between;
   position: fixed;
   background-color: white;
   width: 100vw;
-  top: 20px;
   z-index: 100;
 `
 const Title = styled.h3`
@@ -114,7 +123,7 @@ const Description = styled.p`
   margin: 0;
 `
 const Line = styled.hr`
-  margin: 9px 15px 9px 15px;
+  margin: 5px 15px 5px 15px;
   border-top: 1px solid grey;
   border-bottom: 0px solid grey;
 `

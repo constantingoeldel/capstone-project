@@ -21,8 +21,7 @@ export function filterBySearch(searchTerm, source) {
       fuzzysearch(searchTerm, item.description) ||
       fuzzysearch(searchTerm, item.location.country) ||
       fuzzysearch(searchTerm, item.location.city) ||
-      fuzzysearch(searchTerm, item.location.countrycode) ||
-      console.log(item)
+      fuzzysearch(searchTerm, item.location.countrycode)
     return item
   })
   return projects

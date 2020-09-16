@@ -9,14 +9,14 @@ import Overlay from './components/Overlay'
 export default function App() {
   const [tags, setTags] = useState(null)
   const [projects, setProjects] = useState(null)
-  const [searchTerm, setSearchTerm] = useState(null)
+  const [searchTerm, setSearchTerm] = useState()
 
   useEffect(() => {
-    fetch('http://localhost:4000/api/projects')
+    fetch('https://unfinished-api.herokuapp.com/api/projects')
       .then((res) => res.json())
       .catch((error) => console.log(error))
       .then((projects) => setProjects(projects))
-    fetch('http://localhost:4000/api/tags')
+    fetch('https://unfinished-api.herokuapp.com/api/tags')
       .then((res) => res.json())
       .catch((error) => console.log(error))
       .then((tags) => setTags(tags))
@@ -79,7 +79,6 @@ export default function App() {
     ])
   }
   function onSearch(event) {
-    setSearchTerm(event.target.value)
-    console.log('search', searchTerm)
+    setSearchTerm(event.target.value || ' ')
   }
 }

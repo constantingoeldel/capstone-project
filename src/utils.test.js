@@ -124,16 +124,9 @@ describe('Searching', () => {
       expect.arrayContaining([expect.objectContaining({ accordingToSearchTerms: true })])
     )
   })
-  // it('Is false when nothing applies', () => {
-  //   expect(filterBySearch(searchTerm2, mockData)).toEqual([
-  //     {
-  //       country: 'SE',
-  //       description:
-  //         'pharetra magna vestibulum aliquet ultrices erat tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque',
-  //       title: 'Five Minutes to Live',
-  //       tags: ['Social Business', 'Food & Drink'],
-  //       applyingTags: [],
-  //     },
-  //   ])
-  // })
+  it('Returns false when SearchTerm does not apply', () => {
+    expect(filterBySearch(searchTerm, twoProjects)).toEqual(
+      expect.arrayContaining([expect.objectContaining({ accordingToSearchTerms: false })])
+    )
+  })
 })

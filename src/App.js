@@ -3,7 +3,6 @@ import Project from './components/Project'
 import TagCluster from './components/TagCluster'
 import { sortByTags, filterBySearch } from './utils'
 import Search from './components/Search'
-// import Counter from './components/Counter'
 import Overlay from './components/Overlay'
 
 export default function App() {

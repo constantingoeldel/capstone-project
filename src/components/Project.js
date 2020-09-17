@@ -10,7 +10,17 @@ export default function Project({ project, onClick }) {
       <Img alt='' src={project.image ?? 'https://source.unsplash.com/random'}></Img>
       <TagList>
         {project.tags.map((tag) => (
-          <Tag key={tag.text} text={tag.text} applies={tag.applies} />
+          <Tag
+            key={tag.text}
+            text={tag.text}
+            applies={tag.applies}
+            background={{
+              active: '#11dc8b',
+              inactive: '#11dc8b',
+              opacityActive: 1,
+              opacityInactive: 0.6,
+            }}
+          />
         ))}
       </TagList>
       <ProjectHeadline title={project.title} country={project.location.countrycode} />
@@ -46,7 +56,7 @@ Project.propTypes = {
 
 const Card = styled.section`
   margin: 20px;
-  box-shadow: 0 5px 10px rgba(27, 153, 139, 0.58);
+  box-shadow: 0 3px 20px rgba(1, 25, 54, 0.4);
   border-radius: 42px;
 `
 const Img = styled.img`
@@ -65,11 +75,6 @@ export const TagList = styled.ul`
     border-radius: 5px;
     font-size: 90%;
     padding: 8px;
-    background-color: #1b998b;
-    opacity: 0.6;
-  }
-  & > li.active {
-    opacity: 1;
   }
 `
 const Description = styled.p`

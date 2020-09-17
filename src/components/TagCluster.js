@@ -12,6 +12,12 @@ export default function TagCluster({ tags, onTagClick }) {
           text={tag.text}
           applies={tag.applies}
           onClick={() => onTagClick(tag, index)}
+          background={{
+            active: '#11dc8b',
+            inactive: '#2e2e3a',
+            opacityActive: 1,
+            opacityInactive: 1,
+          }}
         />
       ))}
     </TagList>
@@ -31,6 +37,6 @@ TagCluster.propTypes = {
 const TagList = styled.ul`
   padding: 10px;
   & > li.active {
-    background-color: #1b998b;
+    background-color: #11dc8b;
   }
 `

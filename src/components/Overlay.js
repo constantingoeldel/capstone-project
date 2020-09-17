@@ -32,7 +32,17 @@ export default function Overlay({ project, onBack }) {
       <Img alt='' src={project.image ?? 'https://source.unsplash.com/random'}></Img>
       <TagList>
         {project.tags.map((tag) => (
-          <Tag text={tag.text} applies={tag.applies} key={tag.text} />
+          <Tag
+            text={tag.text}
+            applies={tag.applies}
+            key={tag.text}
+            background={{
+              active: '#11dc8b',
+              inactive: '#11dc8b',
+              opacityActive: 1,
+              opacityInactive: 0.6,
+            }}
+          />
         ))}
       </TagList>
       <Contributors contributors={project.contributors} />
@@ -102,7 +112,7 @@ const Headline = styled(animated.section)`
 const Title = styled.h3`
   font-weight: 300;
   font-size: 170%;
-  padding: 10px 10px 5px 10px;
+  padding: 12px 10px 5px 10px;
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
@@ -111,11 +121,10 @@ const Title = styled.h3`
 const ArrowStyled = styled(Arrow)`
   margin: 15px;
   cursor: pointer;
+  margin-top: 18px;
 `
 const ShareStyled = styled(Share)`
   margin: 15px;
-  width: 25px;
-  height: 25px;
   margin-right: 25px;
   cursor: pointer;
 `
@@ -130,7 +139,7 @@ const Line = styled.hr`
   border-bottom: 0px solid grey;
 `
 const FollowButton = styled.button.attrs((props) => ({ type: 'button' }))`
-  background-color: #1b998b;
+  background-color: #11dc8b;
   border: 0;
   outline: 0;
   border-radius: 10px;

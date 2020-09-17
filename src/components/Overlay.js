@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSpring, animated, config } from 'react-spring'
+import { useSwipeable } from 'react-swipeable'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import Tag from './Tag'
@@ -11,6 +12,7 @@ import { TagList } from './Project'
 
 export default function Overlay({ project, onBack }) {
   const [expanded, setExpanded] = useState(null)
+  const swipeDown = useSwipeable({ onSwipedDown: () => setExpanded(false) })
   const slideUp = useSpring({
     config: config.stiff,
     top: expanded ? '3vh' : '100vh',
@@ -21,7 +23,7 @@ export default function Overlay({ project, onBack }) {
   }, [])
 
   return (
-    <OverlaySection style={slideUp}>
+    <OverlaySection {...swipeDown} style={slideUp}>
       <Headline style={slideUp}>
         <ArrowStyled onClick={() => setExpanded(false)} />
         <Title>{project.title}</Title>

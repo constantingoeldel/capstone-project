@@ -67,7 +67,6 @@ export default function App() {
   )
   // Mehr Anzeigen button einbauen
   function toggleDetailOverlay(project, index) {
-    console.log('called')
     setProjects([
       ...projects.slice(0, index),
       { ...project, expanded: !project.expanded },

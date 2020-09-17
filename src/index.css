@@ -2,7 +2,6 @@
   box-sizing: border-box;
 }
 body {
-  content-visibility: auto;
   margin: 0;
   font-family: 'Roboto', sans-serif;
   font-size: 112.5%;
@@ -10,6 +9,5 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 body.overlay {
-  height: calc(100vh-20px);
-  overflow-y: hidden;
+  position: fixed;
 }

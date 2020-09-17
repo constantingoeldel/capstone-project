@@ -9,6 +9,7 @@ export default function App() {
   const [tags, setTags] = useState(null)
   const [projects, setProjects] = useState(null)
   const [searchTerm, setSearchTerm] = useState()
+  const [scrollPosition, setScrollPosition] = useState(0)
 
   useEffect(() => {
     fetch('https://unfinished-api.herokuapp.com/api/projects')
@@ -72,7 +73,9 @@ export default function App() {
       { ...project, expanded: !project.expanded },
       ...projects.slice(index + 1),
     ])
+    !document.body.classList.contains('overlay') && setScrollPosition(window.scrollY)
     document.body.classList.toggle('overlay')
+    window.scroll({ top: scrollPosition, left: 0, behavior: 'smooth' })
   }
   function onTagClick(tag, index) {
     setTags([

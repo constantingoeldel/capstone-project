@@ -4,7 +4,12 @@ import PropTypes from 'prop-types'
 
 export default function Search({ onSearch }) {
   return (
-    <Form onSubmit={(event) => event.preventDefault()}>
+    <Form
+      onSubmit={(event) => {
+        event.preventDefault()
+        document.activeElement.blur()
+      }}
+    >
       <Input name='input' placeholder='Search for Projects' onChange={onSearch} />
       <Button onClick={resetInput}>Clear</Button>
     </Form>

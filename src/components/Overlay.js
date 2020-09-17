@@ -12,7 +12,7 @@ import { TagList } from './Project'
 
 export default function Overlay({ project, onBack }) {
   const [expanded, setExpanded] = useState(null)
-  const swipeDown = useSwipeable({ onSwipedDown: () => setExpanded(false), delta: 50 })
+  const swipeDown = useSwipeable({ onSwipedDown: () => setExpanded(false), delta: 300 })
   const slideUp = useSpring({
     config: config.stiff,
     top: expanded ? '3vh' : '100vh',
@@ -149,5 +149,5 @@ const FollowButton = styled.button.attrs((props) => ({ type: 'button' }))`
 
   padding: 8px 10px;
   width: calc(100% - 40px);
-  margin: 20px 0 50px 20px;
+  margin: 20px 0 150px 20px;
 `

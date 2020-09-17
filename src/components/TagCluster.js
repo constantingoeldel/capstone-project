@@ -36,7 +36,4 @@ TagCluster.propTypes = {
 
 const TagList = styled.ul`
   padding: 10px;
-  & > li.active {
-    background-color: #11dc8b;
-  }
 `

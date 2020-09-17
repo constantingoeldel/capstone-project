@@ -18,6 +18,13 @@ export default function Tag({ background, text, applies, onClick = () => {} }) {
 Tag.propTypes = {
   tag: PropTypes.shape({ text: PropTypes.string.isRequired, applies: PropTypes.bool.isRequired }),
   onClick: PropTypes.func,
+  applies: PropTypes.bool.isRequired,
+  background: PropTypes.shape({
+    active: PropTypes.string.isRequired,
+    inactive: PropTypes.string.isRequired,
+    opacityActive: PropTypes.number.isRequired,
+    opacityInactive: PropTypes.number.isRequired,
+  }),
 }
 const TagStyled = styled(animated.li)`
   display: inline-block;

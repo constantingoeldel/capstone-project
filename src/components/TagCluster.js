@@ -1,27 +1,36 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
-import Tags from './Tags'
+import Tag from './Tag'
 
 export default function TagCluster({ tags, onTagClick }) {
   return (
     <TagList>
       {tags.map((tag, index) => (
-        <Tags key={tag} content={tag} onClick={selectTag} />
+        <Tag
+          key={tag.text}
+          text={tag.text}
+          applies={tag.applies}
+          onClick={() => onTagClick(tag, index)}
+        />
       ))}
     </TagList>
   )
-  function selectTag(event, tag) {
-    event.target.classList.toggle('active')
-    onTagClick(tag)
-  }
 }
 
 TagCluster.propTypes = {
-  tags: PropTypes.array.isRequired,
+  tags: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      applies: PropTypes.bool.isRequired,
+    })
+  ),
   onTagClick: PropTypes.func,
 }
 
 const TagList = styled.ul`
   padding: 10px;
+  & > li.active {
+    background-color: #1b998b;
+  }
 `

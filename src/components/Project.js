@@ -2,29 +2,45 @@ import React from 'react'
 import styled from 'styled-components/macro'
 import ProjectHeadline from './ProjectHeadline'
 import PropTypes from 'prop-types'
-import Tags from './Tags'
+import Tag from './Tag'
 
-export default function Project({ data, onClick }) {
+export default function Project({ project, onClick }) {
   return (
-    <Card onClick={() => onClick(data)}>
-      <Img alt='' src={data.image ?? 'https://source.unsplash.com/random'}></Img>
+    <Card onClick={onClick}>
+      <Img alt='' src={project.image ?? 'https://source.unsplash.com/random'}></Img>
       <TagList>
-        {data.tags.map((tag, index) => (
-          <Tags content={tag} key={tag} />
+        {project.tags.map((tag) => (
+          <Tag key={tag.text} text={tag.text} applies={tag.applies} />
         ))}
       </TagList>
-      <ProjectHeadline title={data.title} country={data.country} />
-      <Description>{data.description}</Description>
+      <ProjectHeadline title={project.title} country={project.location.countrycode} />
+      <Description>{project.description}</Description>
     </Card>
   )
 }
 Project.propTypes = {
-  data: PropTypes.shape({
-    tags: PropTypes.array.isRequired,
-    country: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  project: PropTypes.shape({
+    tags: PropTypes.arrayOf(
+      PropTypes.shape({ text: PropTypes.string.isRequired, applies: PropTypes.bool.isRequired })
+    ),
     title: PropTypes.string.isRequired,
     image: PropTypes.string,
+    description: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      country: PropTypes.string.isRequired,
+      countrycode: PropTypes.string.isRequired,
+      city: PropTypes.string.isRequired,
+    }),
+    contributors: PropTypes.arrayOf(
+      PropTypes.shape({ name: PropTypes.string.isRequired, picture: PropTypes.string.isRequired })
+    ),
+    details: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        information: PropTypes.string.isRequired,
+      })
+    ),
   }),
 }
 
@@ -39,7 +55,7 @@ const Img = styled.img`
   object-fit: cover;
   border-radius: 42px 42px 0 0;
 `
-const TagList = styled.ul`
+export const TagList = styled.ul`
   display: flex;
   overflow: scroll;
   padding: 0;
@@ -51,6 +67,9 @@ const TagList = styled.ul`
     padding: 8px;
     background-color: #1b998b;
     opacity: 0.6;
+  }
+  & > li.active {
+    opacity: 1;
   }
 `
 const Description = styled.p`

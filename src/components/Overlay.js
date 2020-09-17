@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import Tags from './Tags'
+import Tag from './Tag'
 import { ReactComponent as Arrow } from '../icons/back-arrow.svg'
 import { ReactComponent as Share } from '../icons/share.svg'
 import Contributors from './Contributors'
 import Detail from './Detail'
+import { TagList } from './Project'
 
 export default function Overlay({ project, onBack }) {
   return (
@@ -17,35 +18,44 @@ export default function Overlay({ project, onBack }) {
       </Headline>
       <Img alt='' src={project.image ?? 'https://source.unsplash.com/random'}></Img>
       <TagList>
-        {project.tags.map((tag, index) => (
-          <Tags content={tag} key={tag} />
+        {project.tags.map((tag) => (
+          <Tag text={tag.text} applies={tag.applies} key={tag.text} />
         ))}
       </TagList>
       <Contributors contributors={project.contributors} />
-      {project.details &&
-        project.details.map((detail) => (
-          <Detail title={detail.title} content={detail.information} />
-        ))}
       <Description>{project.description}</Description>
+      {project.details.map((detail, index) => (
+        <div key={detail.title}>
+          <Detail title={detail.title} content={detail.information} />
+          {index !== project.details.length - 1 && <Line />}
+        </div>
+      ))}
+      <FollowButton>Support Project</FollowButton>
     </OverlaySection>
   )
 }
 
 Overlay.propTypes = {
+  onBack: PropTypes.func.isRequired,
   project: PropTypes.shape({
-    tags: PropTypes.array.isRequired,
-    country: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    tags: PropTypes.arrayOf(
+      PropTypes.shape({ text: PropTypes.string.isRequired, applies: PropTypes.bool.isRequired })
+    ),
     title: PropTypes.string.isRequired,
     image: PropTypes.string,
-    mission: PropTypes.string.isRequired,
-    about: PropTypes.string.isRequired,
-    updates: PropTypes.string.isRequired,
-    comments: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      country: PropTypes.string.isRequired,
+      countrycode: PropTypes.string.isRequired,
+      city: PropTypes.string.isRequired,
+    }),
     contributors: PropTypes.arrayOf(
+      PropTypes.shape({ name: PropTypes.string.isRequired, picture: PropTypes.string.isRequired })
+    ),
+    details: PropTypes.arrayOf(
       PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        picture: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        information: PropTypes.string.isRequired,
       })
     ),
   }),
@@ -68,20 +78,6 @@ const Img = styled.img`
   height: 250px;
   object-fit: cover;
   border-radius: 10px;
-`
-const TagList = styled.ul`
-  display: flex;
-  overflow: scroll;
-  padding: 0;
-  margin: 5px;
-  margin-bottom: 0;
-  & > li {
-    border-radius: 5px;
-    font-size: 90%;
-    padding: 8px;
-    background-color: #1b998b;
-    opacity: 0.6;
-  }
 `
 const Headline = styled.section`
   display: flex;
@@ -114,7 +110,24 @@ const ShareStyled = styled(Share)`
 `
 const Description = styled.p`
   font-weight: 300;
-  font-size: 120%;
-  padding: 10px 10px 20px 20px;
+  padding: 10px 10px 20px 15px;
   margin: 0;
+`
+const Line = styled.hr`
+  margin: 9px 15px 9px 15px;
+  border-top: 1px solid grey;
+  border-bottom: 0px solid grey;
+`
+const FollowButton = styled.button.attrs((props) => ({ type: 'button' }))`
+  background-color: #1b998b;
+  border: 0;
+  outline: 0;
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: white;
+  font-size: 140%;
+
+  padding: 8px 10px;
+  width: calc(100% - 40px);
+  margin: 20px 0 50px 20px;
 `

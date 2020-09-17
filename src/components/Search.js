@@ -11,7 +11,7 @@ export default function Search({ onSearch }) {
   )
   function resetInput(event) {
     event.target.form.input.value = ''
-    onSearch()
+    onSearch((event = { target: { value: '' } }))
   }
 }
 
@@ -37,7 +37,6 @@ const Input = styled.input`
 `
 
 const Button = styled.button.attrs((props) => ({ type: 'button' }))`
-
   background-color: #1b998b;
   border: 0;
   outline: 0;

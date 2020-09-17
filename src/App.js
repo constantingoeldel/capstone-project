@@ -4,6 +4,7 @@ import TagCluster from './components/TagCluster'
 import { sortByTags, filterBySearch } from './utils'
 import Search from './components/Search'
 import Overlay from './components/Overlay'
+import styled from 'styled-components'
 
 export default function App() {
   const [tags, setTags] = useState(null)
@@ -41,6 +42,11 @@ export default function App() {
   return (
     <>
       <Search onSearch={onSearch} />
+      <StyledExplanation>
+        You can search for a projects title, country, countrycode, city or description. Searchterms
+        are case-sensitive and can omit characters. When tags are selected, results are shown in
+        order of relevance. Tags and search can be used in combination.
+      </StyledExplanation>
       {tags && <TagCluster tags={tags} onTagClick={onTagClick} />}
       {projects &&
         projects
@@ -88,3 +94,10 @@ export default function App() {
     setSearchTerm(event.target.value || ' ')
   }
 }
+
+const StyledExplanation = styled.p`
+  margin: 20px;
+  color: darkgrey;
+  font-size: 80%;
+  text-align: center;
+`

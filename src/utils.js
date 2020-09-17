@@ -1,27 +1,28 @@
 import fuzzysearch from 'fuzzysearch'
 
-export function sortByTags(tags = [], source = [{}]) {
+export function sortByTags(selectedTags = [], source) {
   const projects = source
-    .map((project) => {
-      project.applyingTags = project.tags.filter((projectTag, index) => tags.includes(projectTag))
-      return project
+    .map((item) => {
+      item.tags.map((tag) => (tag.applies = selectedTags.includes(tag.text)))
+      return item
     })
-    .filter((project) => tags.length === 0 || project.applyingTags.length > 0)
     .sort(
       (firstProject, secondProject) =>
-        secondProject.applyingTags.length - firstProject.applyingTags.length
+        secondProject.tags.filter((tag) => tag.applies).length -
+        firstProject.tags.filter((tag) => tag.applies).length
     )
   return projects
 }
 
-export function filterBySearch(
-  event = { target: { value: '' } },
-  source = { projects: [{ title: '', country: '', description: '' }] }
-) {
-  return source.projects.filter(
-    (project) =>
-      fuzzysearch(event.target.value, project.title) ||
-      fuzzysearch(event.target.value, project.country) ||
-      fuzzysearch(event.target.value, project.description)
-  )
+export function filterBySearch(searchTerm, source) {
+  const projects = source.map((item) => {
+    item.accordingToSearchTerms =
+      fuzzysearch(searchTerm, item.title) ||
+      fuzzysearch(searchTerm, item.description) ||
+      fuzzysearch(searchTerm, item.location.country) ||
+      fuzzysearch(searchTerm, item.location.city) ||
+      fuzzysearch(searchTerm, item.location.countrycode)
+    return item
+  })
+  return projects
 }

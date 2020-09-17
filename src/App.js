@@ -43,9 +43,15 @@ export default function App() {
     <>
       <Search onSearch={onSearch} />
       <StyledExplanation>
-        You can search for a projects title, country, countrycode, city or description. Searchterms
-        are case-sensitive and can omit characters. When tags are selected, results are shown in
-        order of relevance. Tags and search can be used in combination.
+        {projects &&
+          projects.filter(
+            (project) =>
+              project.accordingToSearchTerms || project.accordingToSearchTerms === undefined
+          ).length}{' '}
+        out of {projects && projects.length} Projects fit your search! You can search for a projects
+        title, country, countrycode, city or description. Searchterms are case-sensitive and can
+        omit characters. When tags are selected, results are shown in order of relevance. Tags and
+        search can be used in combination.
       </StyledExplanation>
       {tags && <TagCluster tags={tags} onTagClick={onTagClick} />}
       {projects &&

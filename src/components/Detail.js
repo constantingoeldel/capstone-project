@@ -1,17 +1,39 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { ReactComponent as Plus } from '../icons/plus.svg'
+import { useSpring, animated } from 'react-spring'
+import { useMeasure } from 'react-use'
 
 export default function Detail({ title, content }) {
   const [isExpanded, setIsExpanded] = useState(false)
+  const [contentHeight, setContentHeight] = useState(0)
+  const [ref, { height }] = useMeasure()
+  const rotation = useSpring({ transform: isExpanded ? 'rotate(225deg)' : 'rotate(0deg)' })
+  const expansion = useSpring({
+    height: isExpanded ? `${contentHeight}px` : '0px',
+    opacity: isExpanded ? 1 : 0,
+  })
+
+  useEffect(() => {
+    setContentHeight(height)
+    window.addEventListener('resize', setContentHeight(height))
+    return window.removeEventListener('resize', setContentHeight(height))
+  }, [height, isExpanded])
+
   return (
     <>
       <Title onClick={toggleDetail}>
-        <PlusStyled />
+        <animated.div style={rotation}>
+          <PlusStyled />
+        </animated.div>
         <Headline>{title.charAt(0).toUpperCase() + title.slice(1)}</Headline>
       </Title>
-      <Body isExpanded={isExpanded}>{content}</Body>
+      <animated.div style={expansion}>
+        <div ref={ref}>
+          <Body>{content}</Body>
+        </div>
+      </animated.div>
     </>
   )
   function toggleDetail() {
@@ -24,7 +46,8 @@ Detail.propTypes = {
   content: PropTypes.string.isRequired,
 }
 const PlusStyled = styled(Plus)`
-  margin: 10px;
+  display: flex;
+  margin: 12px;
   cursor: pointer;
 `
 const Title = styled.section`
@@ -33,9 +56,8 @@ const Title = styled.section`
 `
 const Body = styled.p`
   font-weight: 300;
-  padding: 10px 10px 20px 15px;
+  padding: 10px 10px 10px 15px;
   margin: 0;
-  display: ${(props) => (props.isExpanded ? 'block' : 'none')};
 `
 const Headline = styled.h3`
   font-weight: 300;

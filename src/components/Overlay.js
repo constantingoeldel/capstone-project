@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSpring, animated, config } from 'react-spring'
+import { useSwipeable } from 'react-swipeable'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import Tag from './Tag'
@@ -9,17 +11,38 @@ import Detail from './Detail'
 import { TagList } from './Project'
 
 export default function Overlay({ project, onBack }) {
+  const [expanded, setExpanded] = useState(null)
+  const swipeDown = useSwipeable({ onSwipedDown: () => setExpanded(false), delta: 300 })
+  const slideUp = useSpring({
+    config: config.stiff,
+    top: expanded ? '3vh' : '100vh',
+    onRest: () => expanded === false && onBack(),
+  })
+  useEffect(() => {
+    setExpanded((expanded) => true)
+  }, [])
+
   return (
-    <OverlaySection>
-      <Headline>
-        <ArrowStyled onClick={onBack} />
+    <OverlaySection {...swipeDown} style={slideUp}>
+      <Headline style={slideUp}>
+        <ArrowStyled onClick={() => setExpanded(false)} />
         <Title>{project.title}</Title>
         <ShareStyled />
       </Headline>
       <Img alt='' src={project.image ?? 'https://source.unsplash.com/random'}></Img>
       <TagList>
         {project.tags.map((tag) => (
-          <Tag text={tag.text} applies={tag.applies} key={tag.text} />
+          <Tag
+            text={tag.text}
+            applies={tag.applies}
+            key={tag.text}
+            background={{
+              active: '#11dc8b',
+              inactive: '#11dc8b',
+              opacityActive: 1,
+              opacityInactive: 0.6,
+            }}
+          />
         ))}
       </TagList>
       <Contributors contributors={project.contributors} />
@@ -60,10 +83,9 @@ Overlay.propTypes = {
     ),
   }),
 }
-const OverlaySection = styled.section`
+const OverlaySection = styled(animated.section)`
   position: fixed;
   overflow-y: scroll;
-  top: 20px;
   height: 100vh;
   width: 100vw;
   z-index: 99;
@@ -79,19 +101,18 @@ const Img = styled.img`
   object-fit: cover;
   border-radius: 10px;
 `
-const Headline = styled.section`
+const Headline = styled(animated.section)`
   display: flex;
   justify-content: space-between;
   position: fixed;
   background-color: white;
   width: 100vw;
-  top: 20px;
   z-index: 100;
 `
 const Title = styled.h3`
   font-weight: 300;
   font-size: 170%;
-  padding: 10px 10px 5px 10px;
+  padding: 12px 10px 5px 10px;
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
@@ -100,11 +121,10 @@ const Title = styled.h3`
 const ArrowStyled = styled(Arrow)`
   margin: 15px;
   cursor: pointer;
+  margin-top: 18px;
 `
 const ShareStyled = styled(Share)`
   margin: 15px;
-  width: 25px;
-  height: 25px;
   margin-right: 25px;
   cursor: pointer;
 `
@@ -114,12 +134,12 @@ const Description = styled.p`
   margin: 0;
 `
 const Line = styled.hr`
-  margin: 9px 15px 9px 15px;
+  margin: 5px 15px 5px 15px;
   border-top: 1px solid grey;
   border-bottom: 0px solid grey;
 `
 const FollowButton = styled.button.attrs((props) => ({ type: 'button' }))`
-  background-color: #1b998b;
+  background-color: #11dc8b;
   border: 0;
   outline: 0;
   border-radius: 10px;
@@ -129,5 +149,5 @@ const FollowButton = styled.button.attrs((props) => ({ type: 'button' }))`
 
   padding: 8px 10px;
   width: calc(100% - 40px);
-  margin: 20px 0 50px 20px;
+  margin: 20px 0 150px 20px;
 `

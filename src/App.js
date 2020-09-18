@@ -10,6 +10,7 @@ export default function App() {
   const [tags, setTags] = useState(null)
   const [projects, setProjects] = useState(null)
   const [searchTerm, setSearchTerm] = useState()
+  const [scrollPosition, setScrollPosition] = useState(0)
 
   useEffect(() => {
     fetch('https://unfinished-api.herokuapp.com/api/projects')
@@ -42,9 +43,15 @@ export default function App() {
     <>
       <Search onSearch={onSearch} />
       <StyledExplanation>
-        You can search for a projects title, country, countrycode, city or description. Searchterms
-        are case-sensitive and can omit characters. When tags are selected, results are shown in
-        order of relevance. Tags and search can be used in combination.
+        {projects &&
+          projects.filter(
+            (project) =>
+              project.accordingToSearchTerms || project.accordingToSearchTerms === undefined
+          ).length}{' '}
+        out of {projects && projects.length} Projects fit your search! You can search for a projects
+        title, country, countrycode, city or description. Searchterms are case-sensitive and can
+        omit characters. When tags are selected, results are shown in order of relevance. Tags and
+        search can be used in combination.
       </StyledExplanation>
       {tags && <TagCluster tags={tags} onTagClick={onTagClick} />}
       {projects &&
@@ -62,7 +69,11 @@ export default function App() {
         projects.map(
           (project, index) =>
             project.expanded && (
-              <Overlay project={project} onBack={() => toggleDetailOverlay(project, index)} />
+              <Overlay
+                key={project._id}
+                project={project}
+                onBack={() => toggleDetailOverlay(project, index)}
+              />
             )
         )}
     </>
@@ -74,7 +85,9 @@ export default function App() {
       { ...project, expanded: !project.expanded },
       ...projects.slice(index + 1),
     ])
+    !document.body.classList.contains('overlay') && setScrollPosition(window.scrollY)
     document.body.classList.toggle('overlay')
+    window.scroll({ top: scrollPosition, left: 0, behavior: 'smooth' })
   }
   function onTagClick(tag, index) {
     setTags([

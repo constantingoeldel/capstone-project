@@ -4,7 +4,12 @@ import PropTypes from 'prop-types'
 
 export default function Search({ onSearch }) {
   return (
-    <Form onSubmit={(event) => event.preventDefault()}>
+    <Form
+      onSubmit={(event) => {
+        event.preventDefault()
+        document.activeElement.blur()
+      }}
+    >
       <Input name='input' placeholder='Search for Projects' onChange={onSearch} />
       <Button onClick={resetInput}>Clear</Button>
     </Form>
@@ -19,7 +24,7 @@ Search.propTypes = {
   onSearch: PropTypes.func.isRequired,
 }
 const Form = styled.form`
-  box-shadow: 0 5px 10px rgba(27, 153, 139, 0.58);
+  box-shadow: 0 5px 20px rgba(17, 220, 139, 0.4);
   padding: 10px;
   border-radius: 10px;
   width: 80%;
@@ -29,6 +34,7 @@ const Form = styled.form`
 `
 const Input = styled.input`
   font-size: 120%;
+  font-weight: 300;
   border: 0;
   outline: 0;
   border-radius: 5em;
@@ -37,7 +43,7 @@ const Input = styled.input`
 `
 
 const Button = styled.button.attrs((props) => ({ type: 'button' }))`
-  background-color: #1b998b;
+  background-color: #11dc8b;
   border: 0;
   outline: 0;
   border-radius: 10px;

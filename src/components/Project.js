@@ -57,13 +57,13 @@ Project.propTypes = {
 const Card = styled.section`
   margin: 20px;
   box-shadow: 0 3px 20px rgba(1, 25, 54, 0.4);
-  border-radius: 42px;
+  border-radius: 25px;
 `
 const Img = styled.img`
   width: 100%;
   height: 250px;
   object-fit: cover;
-  border-radius: 42px 42px 0 0;
+  border-radius: 25px 25px 0 0;
 `
 export const TagList = styled.ul`
   display: flex;

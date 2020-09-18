@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSpring, animated, config } from 'react-spring'
 import { useSwipeable } from 'react-swipeable'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 import Tag from './Tag'
 import { ReactComponent as Arrow } from '../icons/back-arrow.svg'
@@ -19,7 +19,7 @@ export default function Overlay({ project, onBack }) {
     onRest: () => expanded === false && onBack(),
   })
   useEffect(() => {
-    setExpanded((expanded) => true)
+    setExpanded(true)
   }, [])
 
   return (

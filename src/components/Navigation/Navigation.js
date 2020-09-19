@@ -3,9 +3,9 @@ import React from 'react'
 import { BrowserRouter as Router, Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-export default function Navigation() {
+export default function Navigation({ onClick }) {
   return (
-    <NavStyled>
+    <NavStyled onClick={onClick}>
       <LinkStyled to='/'>Dashboard</LinkStyled>
       <LinkStyled to='/opportunities'>Opportunities</LinkStyled>
       <LinkStyled to='/my-projects'>My Projects</LinkStyled>

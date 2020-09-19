@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import Project from './Project'
-import TagCluster from './TagCluster'
-import { sortByTags, filterBySearch } from '../utils'
-import Search from './Search'
-import Overlay from './Overlay'
+import Project from '../../Project/Project'
+import TagCluster from '../../TagCluster/TagCluster'
+import { sortByTags, filterBySearch } from '../../../utils'
+import Search from '../../Search/Search'
+import Overlay from '../../Project/ProjectOverlay/Overlay'
 import styled from 'styled-components/macro'
 
 export default function App() {

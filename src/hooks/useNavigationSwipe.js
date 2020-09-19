@@ -6,7 +6,7 @@ export default function useNavigationSwipe() {
   const swipe = useSwipeable({
     onSwipedRight: () => setNavigationVisible(true),
     onSwipedLeft: () => setNavigationVisible(false),
-    delta: 10,
+    delta: 30,
   })
-  return [isNavigationVisible, swipe]
+  return [isNavigationVisible, setNavigationVisible, swipe]
 }

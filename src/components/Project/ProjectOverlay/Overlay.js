@@ -3,12 +3,12 @@ import { useSpring, animated, config } from 'react-spring'
 import { useSwipeable } from 'react-swipeable'
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
-import Tag from './Tag'
-import { ReactComponent as Arrow } from '../icons/back-arrow.svg'
-import { ReactComponent as Share } from '../icons/share.svg'
-import Contributors from './Contributors'
-import Detail from './Detail'
-import { TagList } from './Project'
+import Tag from '../../Tag/Tag'
+import { ReactComponent as Arrow } from '../../../icons/back-arrow.svg'
+import { ReactComponent as Share } from '../../../icons/share.svg'
+import Contributors from './Contributors/Contributors'
+import Detail from './Detail/Detail'
+import { TagList } from '../Project'
 
 export default function Overlay({ project, onBack }) {
   const [expanded, setExpanded] = useState(null)

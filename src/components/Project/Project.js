@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components/macro'
-import ProjectHeadline from './ProjectHeadline'
+import ProjectHeadline from './ProjectHeadline/ProjectHeadline'
 import PropTypes from 'prop-types'
-import Tag from './Tag'
+import Tag from '../Tag/Tag'
 
 export default function Project({ project, onClick }) {
   return (

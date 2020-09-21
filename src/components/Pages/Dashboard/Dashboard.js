@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 import Project from '../../Project/Project'
 import Header from '../../Header/Header'
 
-export default function Dahboard({ onBack }) {
+export default function Dashboard({ onBack }) {
   const [projects, setProjects] = useState(null)
   //Rework with user-specific fetch
   useEffect(() => {
@@ -20,4 +19,7 @@ export default function Dahboard({ onBack }) {
       {projects && <Project project={projects[0]} onClick={() => {}} />}
     </>
   )
+}
+Dashboard.propTypes = {
+  onBack: PropTypes.func.isRequired,
 }

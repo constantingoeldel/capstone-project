@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { useSwipeable } from 'react-swipeable/'
 import { useSpring, animated } from 'react-spring'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 import Opportunities from './components/Pages/Opportunities/Opportunities'
 import Navigation from './components/Navigation/Navigation'
@@ -45,6 +45,9 @@ export default function App() {
       </Router>
     </div>
   )
+}
+Opportunities.propTypes = {
+  onBack: PropTypes.func.isRequired,
 }
 const ContentPlacementStyled = styled(animated.div)`
   position: ${(props) => (props.visible ? 'fixed' : 'static')};

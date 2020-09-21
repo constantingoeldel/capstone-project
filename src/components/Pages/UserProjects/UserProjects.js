@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 import Project from '../../Project/Project'
 import Header from '../../Header/Header'
@@ -19,4 +18,7 @@ export default function UserProjects({ onBack }) {
       {projects && <Project project={projects[0]} onClick={() => {}} />}
     </>
   )
+}
+UserProjects.propTypes = {
+  onBack: PropTypes.func.isRequired,
 }

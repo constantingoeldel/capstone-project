@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import styled from 'styled-components/macro'
 import Project from '../../Project/Project'
 import TagCluster from '../../TagCluster/TagCluster'
-import { sortByTags, filterBySearch } from '../../../utils'
+import { sortByTags, filterBySearch } from '../../../services/utils'
 import Search from '../../Search/Search'
 import Overlay from '../../Project/ProjectOverlay/Overlay'
-import styled from 'styled-components/macro'
+import Header from '../../Header/Header'
 
-export default function App() {
+export default function App({ onBack }) {
   const [tags, setTags] = useState(null)
   const [projects, setProjects] = useState(null)
   const [searchTerm, setSearchTerm] = useState()
@@ -41,6 +42,8 @@ export default function App() {
   )
   return (
     <>
+      <Header title='Opportunities' onBack={onBack} />
+
       <Search onSearch={onSearch} />
       <StyledExplanation>
         {projects &&

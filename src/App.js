@@ -25,20 +25,20 @@ export default function App() {
         <ContentPlacementStyled
           visible={isNavigationVisible ? 1 : 0}
           style={slide}
-          onClick={() => setNavigationsVisible(false)}
+          onClick={() => isNavigationVisible && setNavigationsVisible(false)}
         >
           <Switch>
             <Route path='/opportunities'>
-              <Opportunities />
+              <Opportunities onBack={() => setNavigationsVisible(true)} />
             </Route>
             <Route path='/create'>
-              <CreateProject />
+              <CreateProject onBack={() => setNavigationsVisible(true)} />
             </Route>
             <Route path='/my-projects'>
-              <UserProjects />
+              <UserProjects onBack={() => setNavigationsVisible(true)} />
             </Route>
             <Route path='/'>
-              <Dashboard />
+              <Dashboard onBack={() => setNavigationsVisible(true)} />
             </Route>
           </Switch>
         </ContentPlacementStyled>

@@ -7,6 +7,7 @@ export default function useNavigationSwipe() {
     onSwipedRight: () => setNavigationVisible(true),
     onSwipedLeft: () => setNavigationVisible(false),
     delta: 30,
+    preventDefaultTouchmoveEvent: false,
   })
   return [isNavigationVisible, setNavigationVisible, swipe]
 }

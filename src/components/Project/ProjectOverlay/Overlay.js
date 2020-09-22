@@ -12,7 +12,10 @@ import { TagList } from '../Project'
 
 export default function Overlay({ project, onBack }) {
   const [expanded, setExpanded] = useState(null)
-  const swipeDown = useSwipeable({ onSwipedDown: () => setExpanded(false), delta: 300 })
+  const swipeDown = useSwipeable({
+    onSwipedDown: () => setExpanded(false),
+    delta: 100,
+  })
   const slideUp = useSpring({
     config: config.stiff,
     top: expanded ? '3vh' : '100vh',

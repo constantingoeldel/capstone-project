@@ -21,6 +21,7 @@ export default function App() {
   return (
     <div {...swipe}>
       <Router>
+        {isNavigationVisible && <Title>UNFINISHED</Title>}
         {isNavigationVisible && <Navigation onClick={() => setNavigationsVisible(false)} />}
         <ContentPlacementStyled
           visible={isNavigationVisible ? 1 : 0}
@@ -56,4 +57,9 @@ const ContentPlacementStyled = styled(animated.div)`
   margin: 0;
   padding: 0;
   min-height: 100vh;
+`
+const Title = styled.h1`
+  font-family: 'Title';
+  margin: 30px;
+  font-size: 220%;
 `

@@ -3,14 +3,14 @@
 describe('Project', () => {
   beforeEach(() => {
     cy.viewport(375, 667)
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:3000/opportunities')
   })
   it('displays the search bar', () => {
     cy.get('input')
   })
   it('gives correct result', () => {
-    cy.get('input').type('LIB')
-    cy.get('#root > :nth-child(4)').should('contain', 'LIB')
+    cy.get('input').type('CI')
+    cy.get('.sc-bdnylx > :nth-child(5)').should('contain', 'BR')
   })
   it('clears input', () => {
     cy.get('input').type('smth').should('have.value', 'smth')

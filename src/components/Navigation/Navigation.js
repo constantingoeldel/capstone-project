@@ -18,7 +18,7 @@ Navigation.propTypes = {
   onClick: PropTypes.func.isRequired,
 }
 const NavStyled = styled.nav`
-  margin-top: 100px;
+  margin-top: 30px;
   padding: 20px;
 `
 const LinkStyled = styled(Link)`

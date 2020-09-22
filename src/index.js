@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import * as serviceWorker from './services/serviceWorker'
 import GlobalStyles from './services/GlobalStyles'
+import GlobalFonts from './fonts/fonts'
 
 ReactDOM.render(
   <React.StrictMode>
     <GlobalStyles />
+    <GlobalFonts />
     <App />
   </React.StrictMode>,
   document.getElementById('root')

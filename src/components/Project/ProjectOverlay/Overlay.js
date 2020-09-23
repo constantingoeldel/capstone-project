@@ -14,6 +14,8 @@ export default function Overlay({ project, onBack }) {
   const [expanded, setExpanded] = useState(null)
   const swipeDown = useSwipeable({
     onSwipedDown: () => setExpanded(false),
+    onSwipedRight: () => setExpanded(false),
+    onSwipedLeft: () => setExpanded(false),
     delta: 100,
   })
   const slideUp = useSpring({

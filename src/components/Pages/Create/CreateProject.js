@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
+import { useStateWithCallbackLazy } from 'use-state-with-callback'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import Header from '../../Header/Header'
 import TagCluster from '../../TagCluster/TagCluster'
+import { createDatabaseEntry, uploadImage } from '../../../services/services'
 
 export default function Create({ onBack }) {
   const [tags, setTags] = useState(null)
   const [image, setImage] = useState()
-  const [newProject, setNewProject] = useState({})
+  const [newProject, setNewProject] = useStateWithCallbackLazy({ details: [], contributors: [] })
 
   useEffect(() => {
     fetch('https://unfinished-api.herokuapp.com/api/tags')
@@ -78,7 +80,15 @@ export default function Create({ onBack }) {
           required
           rows='4'
           placeholder='Anything less than world peace won`t cut it, sorry :)'
-          onChange={(event) => setNewProject({ ...newProject, mission: event.target.value })}
+          onChange={(event) =>
+            setNewProject({
+              ...newProject,
+              details: [
+                ...newProject.details,
+                { title: 'mission', information: event.target.value },
+              ],
+            })
+          }
         />
         <label htmlFor='about'>Finally, some words about you and potentially your team:</label>
         <textarea
@@ -87,7 +97,12 @@ export default function Create({ onBack }) {
           required
           rows='4'
           placeholder='Avengers, assemble!'
-          onChange={(event) => setNewProject({ ...newProject, about: event.target.value })}
+          onChange={(event) =>
+            setNewProject({
+              ...newProject,
+              details: [...newProject.details, { title: 'about', information: event.target.value }],
+            })
+          }
         />
         <label htmlFor='tags'>Please select tags that fit your initiative</label>
         {tags && <TagCluster tags={tags} id='tags' onTagClick={onTagClick} />}
@@ -105,14 +120,27 @@ export default function Create({ onBack }) {
       ...tags.slice(index + 1),
     ])
   }
-  function onCreate(event) {
+  async function onCreate() {
     let applyingTags = tags.filter((tag) => tag.applies)
-    setNewProject({
-      ...newProject,
-      tags: applyingTags.map((tag) => {
-        return { applies: false, text: tag.text }
-      }),
-    })
+    const res = await uploadImage(image)
+    setNewProject(
+      {
+        ...newProject,
+        // Not meant to stay
+        contributors: [
+          { name: "Dorine O'Deoran", picture: 'http://dummyimage.com/240x249.jpg/dddddd/000000' },
+          { name: 'Tyson Bardill', picture: 'http://dummyimage.com/185x191.jpg/cc0000/ffffff' },
+          { name: 'Jenica Trahmel', picture: 'http://dummyimage.com/168x246.jpg/5fa2dd/ffffff' },
+          { name: 'Loraine Tarn', picture: 'http://dummyimage.com/187x142.jpg/ff4444/ffffff' },
+          { name: 'Blondell McMonies', picture: 'http://dummyimage.com/235x180.jpg/ff4444/ffffff' },
+        ],
+        image: res.secure_url,
+        tags: applyingTags.map((tag) => {
+          return { applies: false, text: tag.text }
+        }),
+      },
+      (newProject) => createDatabaseEntry(newProject)
+    )
   }
 }
 

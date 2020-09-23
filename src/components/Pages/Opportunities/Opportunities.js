@@ -46,39 +46,38 @@ export default function App({ onBack }) {
 
       <Search onSearch={onSearch} />
       <StyledExplanation>
-        {projects &&
-          projects.filter(
+        {
+          projects?.filter(
             (project) =>
               project.accordingToSearchTerms || project.accordingToSearchTerms === undefined
-          ).length}{' '}
-        out of {projects && projects.length} Projects fit your search! You can search for a projects
-        title, country, countrycode, city or description. Searchterms are case-sensitive and can
-        omit characters. When tags are selected, results are shown in order of relevance. Tags and
-        search can be used in combination.
+          ).length
+        }{' '}
+        out of {projects?.length} Projects fit your search! You can search for a projects title,
+        country, countrycode, city or description. Searchterms are case-sensitive and can omit
+        characters. When tags are selected, results are shown in order of relevance. Tags and search
+        can be used in combination.
       </StyledExplanation>
       {tags && <TagCluster tags={tags} onTagClick={onTagClick} />}
-      {projects &&
-        projects
-          .filter((project) => project.accordingToSearchTerms ?? project)
-          .slice(0, 20)
-          .map((project, index) => (
-            <Project
+      {projects
+        ?.filter((project) => project.accordingToSearchTerms ?? project)
+        .slice(0, 20)
+        .map((project, index) => (
+          <Project
+            key={project._id}
+            project={project}
+            onClick={() => toggleDetailOverlay(project, index)}
+          />
+        ))}
+      {projects?.map(
+        (project, index) =>
+          project.expanded && (
+            <Overlay
               key={project._id}
               project={project}
-              onClick={() => toggleDetailOverlay(project, index)}
+              onBack={() => toggleDetailOverlay(project, index)}
             />
-          ))}
-      {projects &&
-        projects.map(
-          (project, index) =>
-            project.expanded && (
-              <Overlay
-                key={project._id}
-                project={project}
-                onBack={() => toggleDetailOverlay(project, index)}
-              />
-            )
-        )}
+          )
+      )}
     </>
   )
   // Mehr Anzeigen button einbauen

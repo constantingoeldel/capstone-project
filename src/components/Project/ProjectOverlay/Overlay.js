@@ -19,7 +19,7 @@ export default function Overlay({ project, onBack }) {
   const slideUp = useSpring({
     config: config.stiff,
     top: expanded ? '3vh' : '100vh',
-    onRest: () => expanded === false && onBack(),
+    onRest: () => expanded || onBack(),
   })
   useEffect(() => {
     setExpanded(true)

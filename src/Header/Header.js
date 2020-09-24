@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
-import { ReactComponent as Arrow } from '../../icons/back-arrow.svg'
+import { ReactComponent as Arrow } from '../icons/back-arrow.svg'
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,

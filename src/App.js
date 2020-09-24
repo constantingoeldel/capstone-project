@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { useSpring, animated } from 'react-spring'
 import styled from 'styled-components/macro'
 
-import Opportunities from './components/Pages/Opportunities/Opportunities'
-import Navigation from './components/Navigation/Navigation'
-import CreateProject from './components/Pages/Create/CreateProject'
-import UserProjects from './components/Pages/UserProjects/UserProjects'
-import Dashboard from './components/Pages/Dashboard/Dashboard'
+import Opportunities from './Pages/Opportunities/Opportunities'
+import Navigation from './Navigation/Navigation'
+import CreateProject from './Pages/Create/CreateProject'
+import UserProjects from './Pages/UserProjects/UserProjects'
+import Dashboard from './Pages/Dashboard/Dashboard'
 
 import useNavigationSwipe from './hooks/useNavigationSwipe'
 

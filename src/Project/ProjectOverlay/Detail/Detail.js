@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
-import { ReactComponent as Plus } from '../icons/plus.svg'
+import { ReactComponent as Plus } from '../../../icons/plus.svg'
 import { useSpring, animated } from 'react-spring'
 import { useMeasure } from 'react-use'
 
@@ -48,7 +48,6 @@ Detail.propTypes = {
 const PlusStyled = styled(Plus)`
   display: flex;
   margin: 12px;
-  cursor: pointer;
 `
 const Title = styled.section`
   display: flex;

@@ -1,6 +1,6 @@
 import fuzzysearch from 'fuzzysearch'
 
-export function sortByTags(selectedTags = [], source) {
+export function sortByTags(selectedTags = [], source = []) {
   const projects = source
     .map((item) => {
       item.tags.map((tag) => (tag.applies = selectedTags.includes(tag.text)))

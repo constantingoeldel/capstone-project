@@ -1,109 +1,62 @@
-import React, { useState, useEffect } from 'react'
-import Project from './components/Project'
-import TagCluster from './components/TagCluster'
-import { sortByTags, filterBySearch } from './utils'
-import Search from './components/Search'
-import Overlay from './components/Overlay'
-import styled from 'styled-components'
+import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { useSpring, animated } from 'react-spring'
+import styled from 'styled-components/macro'
+
+import Opportunities from './Opportunities/Opportunities'
+import Navigation from './Navigation/Navigation'
+import CreateProject from './Create/CreateProject'
+import UserProjects from './UserProjects/UserProjects'
+import Dashboard from './Dashboard/Dashboard'
+
+import useNavigationSwipe from './hooks/useNavigationSwipe'
 
 export default function App() {
-  const [tags, setTags] = useState(null)
-  const [projects, setProjects] = useState(null)
-  const [searchTerm, setSearchTerm] = useState()
-  const [scrollPosition, setScrollPosition] = useState(0)
-
-  useEffect(() => {
-    fetch('https://unfinished-api.herokuapp.com/api/projects')
-      .then((res) => res.json())
-      .catch((error) => console.log(error))
-      .then((projects) => setProjects(projects))
-    fetch('https://unfinished-api.herokuapp.com/api/tags')
-      .then((res) => res.json())
-      .catch((error) => console.log(error))
-      .then((tags) => setTags(tags))
-  }, [])
-  useEffect(
-    () =>
-      setProjects(
-        (projects) =>
-          tags &&
-          projects &&
-          sortByTags(
-            tags.filter((tag) => tag.applies).map((tag) => tag.text),
-            projects
-          )
-      ),
-    [tags]
-  )
-  useEffect(
-    () => setProjects((projects) => searchTerm && projects && filterBySearch(searchTerm, projects)),
-    [searchTerm]
-  )
+  const [isNavigationVisible, setNavigationsVisible, swipe] = useNavigationSwipe()
+  const slide = useSpring({
+    top: isNavigationVisible ? '100px' : '0px',
+    left: isNavigationVisible ? '250px' : '0px',
+  })
   return (
-    <>
-      <Search onSearch={onSearch} />
-      <StyledExplanation>
-        {projects &&
-          projects.filter(
-            (project) =>
-              project.accordingToSearchTerms || project.accordingToSearchTerms === undefined
-          ).length}{' '}
-        out of {projects && projects.length} Projects fit your search! You can search for a projects
-        title, country, countrycode, city or description. Searchterms are case-sensitive and can
-        omit characters. When tags are selected, results are shown in order of relevance. Tags and
-        search can be used in combination.
-      </StyledExplanation>
-      {tags && <TagCluster tags={tags} onTagClick={onTagClick} />}
-      {projects &&
-        projects
-          .filter((project) => project.accordingToSearchTerms ?? project)
-          .slice(0, 20)
-          .map((project, index) => (
-            <Project
-              key={project._id}
-              project={project}
-              onClick={() => toggleDetailOverlay(project, index)}
-            />
-          ))}
-      {projects &&
-        projects.map(
-          (project, index) =>
-            project.expanded && (
-              <Overlay
-                key={project._id}
-                project={project}
-                onBack={() => toggleDetailOverlay(project, index)}
-              />
-            )
-        )}
-    </>
+    <div {...swipe}>
+      <Router>
+        {isNavigationVisible && <Title>UNFINISHED</Title>}
+        {isNavigationVisible && <Navigation onClick={() => setNavigationsVisible(false)} />}
+        <ContentPlacementStyled
+          visible={isNavigationVisible ? 1 : 0}
+          style={slide}
+          onClick={() => isNavigationVisible && setNavigationsVisible(false)}
+        >
+          <Switch>
+            <Route path='/opportunities'>
+              <Opportunities onBack={() => setNavigationsVisible(true)} />
+            </Route>
+            <Route path='/create'>
+              <CreateProject onBack={() => setNavigationsVisible(true)} />
+            </Route>
+            <Route path='/my-projects'>
+              <UserProjects onBack={() => setNavigationsVisible(true)} />
+            </Route>
+            <Route path='/'>
+              <Dashboard onBack={() => setNavigationsVisible(true)} />
+            </Route>
+          </Switch>
+        </ContentPlacementStyled>
+      </Router>
+    </div>
   )
-  // Mehr Anzeigen button einbauen
-  function toggleDetailOverlay(project, index) {
-    setProjects([
-      ...projects.slice(0, index),
-      { ...project, expanded: !project.expanded },
-      ...projects.slice(index + 1),
-    ])
-    !document.body.classList.contains('overlay') && setScrollPosition(window.scrollY)
-    document.body.classList.toggle('overlay')
-    window.scroll({ top: scrollPosition, left: 0, behavior: 'smooth' })
-  }
-  function onTagClick(tag, index) {
-    setTags([
-      ...tags.slice(0, index),
-      { text: tag.text, applies: !tag.applies },
-      ...tags.slice(index + 1),
-    ])
-  }
-  function onSearch(event) {
-    setSearchTerm(event.target.value || ' ')
-  }
 }
 
-const StyledExplanation = styled.p`
-  margin: 20px;
-  color: darkgrey;
-  font-size: 80%;
-  text-align: center;
+const ContentPlacementStyled = styled(animated.div)`
+  position: ${(props) => (props.visible ? 'fixed' : 'static')};
+  box-shadow: ${(props) => (props.visible ? '0 3px 20px rgba(1, 25, 54, 0.4)' : 'none')};
+  border-radius: 15px;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+`
+const Title = styled.h1`
+  font-family: 'Title';
+  margin: 30px;
+  font-size: 220%;
 `

@@ -1,25 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import { useSpring, animated, config } from 'react-spring'
 import { useSwipeable } from 'react-swipeable'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
-import Tag from './Tag'
-import { ReactComponent as Arrow } from '../icons/back-arrow.svg'
-import { ReactComponent as Share } from '../icons/share.svg'
-import Contributors from './Contributors'
-import Detail from './Detail'
-import { TagList } from './Project'
+import Tag from '../../Tag/Tag'
+import { ReactComponent as Arrow } from '../../icons/back-arrow.svg'
+import { ReactComponent as Share } from '../../icons/share.svg'
+import Contributors from './Contributors/Contributors'
+import Detail from './Detail/Detail'
+import { TagList } from '../Project'
 
 export default function Overlay({ project, onBack }) {
   const [expanded, setExpanded] = useState(null)
-  const swipeDown = useSwipeable({ onSwipedDown: () => setExpanded(false), delta: 300 })
+  const swipeDown = useSwipeable({
+    onSwipedDown: () => setExpanded(false),
+    delta: 100,
+  })
   const slideUp = useSpring({
     config: config.stiff,
     top: expanded ? '3vh' : '100vh',
     onRest: () => expanded === false && onBack(),
   })
   useEffect(() => {
-    setExpanded((expanded) => true)
+    setExpanded(true)
   }, [])
 
   return (
@@ -120,13 +123,11 @@ const Title = styled.h3`
 `
 const ArrowStyled = styled(Arrow)`
   margin: 15px;
-  cursor: pointer;
   margin-top: 18px;
 `
 const ShareStyled = styled(Share)`
   margin: 15px;
   margin-right: 25px;
-  cursor: pointer;
 `
 const Description = styled.p`
   font-weight: 300;

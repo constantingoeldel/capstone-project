@@ -15,11 +15,11 @@ export default function Opportunities({ onBack }) {
   const [scrollPosition, setScrollPosition] = useState(0)
 
   useEffect(() => {
-    fetch('https://unfinished-api.herokuapp.com/api/projects')
+    fetch(process.env.GET_PROJECTS_URL)
       .then((res) => res.json())
       .catch((error) => console.log(error))
       .then((projects) => setProjects(projects))
-    fetch('https://unfinished-api.herokuapp.com/api/tags')
+    fetch(process.env.GET_TAGS_URL)
       .then((res) => res.json())
       .catch((error) => console.log(error))
       .then((tags) => setTags(tags))

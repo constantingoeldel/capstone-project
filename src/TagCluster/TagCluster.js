@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
-import Tag from './Tag'
+import Tag from '../Tag/Tag'
 
 export default function TagCluster({ tags, onTagClick }) {
   return (

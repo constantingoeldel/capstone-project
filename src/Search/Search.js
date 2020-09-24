@@ -26,7 +26,7 @@ Search.propTypes = {
 const Form = styled.form`
   box-shadow: 0 5px 20px rgba(17, 220, 139, 0.4);
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 30px;
   width: 80%;
   margin: 20px 10%;
   display: flex;
@@ -46,7 +46,7 @@ const Button = styled.button.attrs((props) => ({ type: 'button' }))`
   background-color: #11dc8b;
   border: 0;
   outline: 0;
-  border-radius: 10px;
+  border-radius: 20px;
   box-sizing: border-box;
   color: white;
   font-size: 110%;

@@ -1,9 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-// eslint-disable-next-line no-unused-vars
-import { BrowserRouter as Router, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
+Navigation.propTypes = {
+  onClick: PropTypes.func.isRequired,
+}
 export default function Navigation({ onClick }) {
   return (
     <NavStyled onClick={onClick}>
@@ -13,9 +15,6 @@ export default function Navigation({ onClick }) {
       <LinkStyled to='/create'>Initiate a Project</LinkStyled>
     </NavStyled>
   )
-}
-Navigation.propTypes = {
-  onClick: PropTypes.func.isRequired,
 }
 const NavStyled = styled.nav`
   margin-top: 30px;

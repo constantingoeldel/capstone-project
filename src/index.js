@@ -4,6 +4,7 @@ import App from './App'
 import * as serviceWorker from './services/serviceWorker'
 import GlobalStyles from './services/GlobalStyles'
 import GlobalFonts from './fonts/fonts'
+require('dotenv').config()
 
 ReactDOM.render(
   <React.StrictMode>

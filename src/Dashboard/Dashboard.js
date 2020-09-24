@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import Project from '../../Project/Project'
-import Header from '../../Header/Header'
+import Project from '../Project/Project'
+import Header from '../Header/Header'
+import getDBEntries from '../services/getDBEntries'
 
 export default function Dashboard({ onBack }) {
-  const [projects, setProjects] = useState(null)
-  //Rework with user-specific fetch
+  const [projects, setProjects] = useState([])
   useEffect(() => {
-    fetch('https://unfinished-api.herokuapp.com/api/projects')
-      .then((res) => res.json())
-      .catch((error) => console.log(error))
-      .then((projects) => setProjects(projects))
+    getDBEntries(process.env.REACT_APP_PROJECTS_URL).then((entries) => setProjects(entries))
   }, [])
   return (
     <>
       <Header title='Dashboard' onBack={onBack} />
 
-      {projects && <Project project={projects[0]} onClick={() => {}} />}
+      {projects[0] && <Project project={projects[0]} onClick={() => {}} />}
     </>
   )
 }

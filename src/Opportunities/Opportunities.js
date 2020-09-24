@@ -1,63 +1,50 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
-import Project from '../../Project/Project'
-import TagCluster from '../../TagCluster/TagCluster'
-import { sortByTags, filterBySearch } from '../../../services/utils'
-import Search from '../../Search/Search'
-import Overlay from '../../Project/ProjectOverlay/Overlay'
-import Header from '../../Header/Header'
+import PropTypes from 'prop-types'
+import Project from '../Project/Project'
+import TagCluster from '../TagCluster/TagCluster'
+import { sortByTags, filterBySearch } from '../services/utils'
+import Search from '../Search/Search'
+import Overlay from '../Project/ProjectOverlay/Overlay'
+import Header from '../Header/Header'
+import getDBEntries from '../services/getDBEntries'
 
-export default function App({ onBack }) {
-  const [tags, setTags] = useState(null)
-  const [projects, setProjects] = useState(null)
-  const [searchTerm, setSearchTerm] = useState()
+export default function Opportunities({ onBack }) {
+  const [tags, setTags] = useState([])
+  const [projects, setProjects] = useState([])
+  const [searchTerm, setSearchTerm] = useState(' ')
   const [scrollPosition, setScrollPosition] = useState(0)
+  const numFoundProjects = projects?.filter(
+    (project) => project.accordingToSearchTerms || project.accordingToSearchTerms === undefined
+  ).length
 
   useEffect(() => {
-    fetch('https://unfinished-api.herokuapp.com/api/projects')
-      .then((res) => res.json())
-      .catch((error) => console.log(error))
-      .then((projects) => setProjects(projects))
-    fetch('https://unfinished-api.herokuapp.com/api/tags')
-      .then((res) => res.json())
-      .catch((error) => console.log(error))
-      .then((tags) => setTags(tags))
+    getDBEntries(process.env.REACT_APP_PROJECTS_URL).then((entries) => setProjects(entries))
+    getDBEntries(process.env.REACT_APP_TAGS_URL).then((entries) => setTags(entries))
   }, [])
   useEffect(
     () =>
-      setProjects(
-        (projects) =>
-          tags &&
-          projects &&
-          sortByTags(
-            tags.filter((tag) => tag.applies).map((tag) => tag.text),
-            projects
-          )
+      setProjects((projects) =>
+        sortByTags(
+          tags.filter((tag) => tag.applies).map((tag) => tag.text),
+          projects
+        )
       ),
     [tags]
   )
-  useEffect(
-    () => setProjects((projects) => searchTerm && projects && filterBySearch(searchTerm, projects)),
-    [searchTerm]
-  )
+  useEffect(() => setProjects((projects) => filterBySearch(searchTerm, projects)), [searchTerm])
   return (
     <>
       <Header title='Opportunities' onBack={onBack} />
 
       <Search onSearch={onSearch} />
       <StyledExplanation>
-        {
-          projects?.filter(
-            (project) =>
-              project.accordingToSearchTerms || project.accordingToSearchTerms === undefined
-          ).length
-        }{' '}
-        out of {projects?.length} Projects fit your search! You can search for a projects title,
-        country, countrycode, city or description. Searchterms are case-sensitive and can omit
-        characters. When tags are selected, results are shown in order of relevance. Tags and search
-        can be used in combination.
+        {numFoundProjects} out of {projects.length} Projects fit your search! You can search for a
+        projects title, country, countrycode, city or description. Searchterms are case-sensitive
+        and can omit characters. When tags are selected, results are shown in order of relevance.
+        Tags and search can be used in combination.
       </StyledExplanation>
-      {tags && <TagCluster tags={tags} onTagClick={onTagClick} />}
+      {<TagCluster tags={tags} onTagClick={onTagClick} />}
       {projects
         ?.filter((project) => project.accordingToSearchTerms ?? project)
         .slice(0, 20)
@@ -80,7 +67,6 @@ export default function App({ onBack }) {
       )}
     </>
   )
-  // Mehr Anzeigen button einbauen
   function toggleDetailOverlay(project, index) {
     setProjects([
       ...projects.slice(0, index),
@@ -99,8 +85,11 @@ export default function App({ onBack }) {
     ])
   }
   function onSearch(event) {
-    setSearchTerm(event.target.value || ' ')
+    setSearchTerm(event.target.value)
   }
+}
+Opportunities.propTypes = {
+  onBack: PropTypes.func.isRequired,
 }
 
 const StyledExplanation = styled.p`

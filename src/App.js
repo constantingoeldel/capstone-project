@@ -1,14 +1,13 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { useSpring, animated } from 'react-spring'
-import styled from 'styled-components'
-import PropTypes from 'prop-types'
+import styled from 'styled-components/macro'
 
-import Opportunities from './components/Pages/Opportunities/Opportunities'
-import Navigation from './components/Navigation/Navigation'
-import CreateProject from './components/Pages/Create/CreateProject'
-import UserProjects from './components/Pages/UserProjects/UserProjects'
-import Dashboard from './components/Pages/Dashboard/Dashboard'
+import Opportunities from './Opportunities/Opportunities'
+import Navigation from './Navigation/Navigation'
+import CreateProject from './Create/CreateProject'
+import UserProjects from './UserProjects/UserProjects'
+import Dashboard from './Dashboard/Dashboard'
 
 import useNavigationSwipe from './hooks/useNavigationSwipe'
 
@@ -46,9 +45,6 @@ export default function App() {
       </Router>
     </div>
   )
-}
-Opportunities.propTypes = {
-  onBack: PropTypes.func.isRequired,
 }
 const ContentPlacementStyled = styled(animated.div)`
   position: ${(props) => (props.visible ? 'fixed' : 'static')};

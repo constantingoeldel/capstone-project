@@ -4,8 +4,8 @@ import { useSwipeable } from 'react-swipeable'
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 import Tag from '../../Tag/Tag'
-import { ReactComponent as Arrow } from '../../../icons/back-arrow.svg'
-import { ReactComponent as Share } from '../../../icons/share.svg'
+import { ReactComponent as Arrow } from '../../icons/back-arrow.svg'
+import { ReactComponent as Share } from '../../icons/share.svg'
 import Contributors from './Contributors/Contributors'
 import Detail from './Detail/Detail'
 import { TagList } from '../Project'
@@ -125,13 +125,11 @@ const Title = styled.h3`
 `
 const ArrowStyled = styled(Arrow)`
   margin: 15px;
-  cursor: pointer;
   margin-top: 18px;
 `
 const ShareStyled = styled(Share)`
   margin: 15px;
   margin-right: 25px;
-  cursor: pointer;
 `
 const Description = styled.p`
   font-weight: 300;

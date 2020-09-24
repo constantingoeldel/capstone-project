@@ -5,18 +5,16 @@ import styled from 'styled-components'
 
 import Header from '../Header/Header'
 import TagCluster from '../TagCluster/TagCluster'
-import { createDatabaseEntry, uploadImage } from '../../../services/services'
+import { createDatabaseEntry, uploadImage } from '../services/services'
+import getDBEntries from '../services/getDBEntries'
 
 export default function Create({ onBack }) {
-  const [tags, setTags] = useState(null)
+  const [tags, setTags] = useState([])
   const [image, setImage] = useState()
   const [newProject, setNewProject] = useStateWithCallbackLazy({ details: [], contributors: [] })
 
   useEffect(() => {
-    fetch('https://unfinished-api.herokuapp.com/api/tags')
-      .then((res) => res.json())
-      .catch((error) => console.log(error))
-      .then((tags) => setTags(tags))
+    getDBEntries(process.env.REACT_APP_TAGS_URL).then((entries) => setTags(entries))
   }, [])
   return (
     <>
@@ -112,7 +110,6 @@ export default function Create({ onBack }) {
       </Form>
     </>
   )
-  // Map all that have apply, fetch in central spot and use a copy of it here
   function onTagClick(tag, index) {
     setTags([
       ...tags.slice(0, index),

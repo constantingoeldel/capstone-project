@@ -48,7 +48,6 @@ Detail.propTypes = {
 const PlusStyled = styled(Plus)`
   display: flex;
   margin: 12px;
-  cursor: pointer;
 `
 const Title = styled.section`
   display: flex;

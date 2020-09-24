@@ -123,13 +123,11 @@ const Title = styled.h3`
 `
 const ArrowStyled = styled(Arrow)`
   margin: 15px;
-  cursor: pointer;
   margin-top: 18px;
 `
 const ShareStyled = styled(Share)`
   margin: 15px;
   margin-right: 25px;
-  cursor: pointer;
 `
 const Description = styled.p`
   font-weight: 300;

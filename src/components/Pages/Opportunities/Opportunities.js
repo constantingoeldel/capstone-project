@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
+import PropTypes from 'prop-types'
 import Project from '../../Project/Project'
 import TagCluster from '../../TagCluster/TagCluster'
 import { sortByTags, filterBySearch } from '../../../services/utils'
@@ -7,7 +8,7 @@ import Search from '../../Search/Search'
 import Overlay from '../../Project/ProjectOverlay/Overlay'
 import Header from '../../Header/Header'
 
-export default function App({ onBack }) {
+export default function Opportunities({ onBack }) {
   const [tags, setTags] = useState(null)
   const [projects, setProjects] = useState(null)
   const [searchTerm, setSearchTerm] = useState()
@@ -102,6 +103,9 @@ export default function App({ onBack }) {
   function onSearch(event) {
     setSearchTerm(event.target.value || ' ')
   }
+}
+Opportunities.propTypes = {
+  onBack: PropTypes.func.isRequired,
 }
 
 const StyledExplanation = styled.p`

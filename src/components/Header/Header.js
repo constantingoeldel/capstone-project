@@ -3,6 +3,10 @@ import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 import { ReactComponent as Arrow } from '../../icons/back-arrow.svg'
 
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
+  onBack: PropTypes.func.isRequired,
+}
 export default function Header({ title, onBack }) {
   return (
     <HeaderStyled>
@@ -11,11 +15,7 @@ export default function Header({ title, onBack }) {
     </HeaderStyled>
   )
 }
-Header.propTypes = {
-  title: PropTypes.string.isRequired,
-  onBack: PropTypes.func.isRequired,
-}
-const HeaderStyled = styled.section`
+const HeaderStyled = styled.header`
   display: flex;
   margin: 10px 0 0 10px;
 `
@@ -31,5 +31,4 @@ const Headline = styled.h3`
 `
 const ArrowStyled = styled(Arrow)`
   margin: 18px 15px 15px 18px;
-  cursor: pointer;
 `

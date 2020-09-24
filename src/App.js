@@ -1,8 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { useSpring, animated } from 'react-spring'
-import styled from 'styled-components'
-import PropTypes from 'prop-types'
+import styled from 'styled-components/macro'
 
 import Opportunities from './components/Pages/Opportunities/Opportunities'
 import Navigation from './components/Navigation/Navigation'
@@ -47,9 +46,7 @@ export default function App() {
     </div>
   )
 }
-Opportunities.propTypes = {
-  onBack: PropTypes.func.isRequired,
-}
+
 const ContentPlacementStyled = styled(animated.div)`
   position: ${(props) => (props.visible ? 'fixed' : 'static')};
   box-shadow: ${(props) => (props.visible ? '0 3px 20px rgba(1, 25, 54, 0.4)' : 'none')};

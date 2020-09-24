@@ -3,8 +3,8 @@ import { useStateWithCallbackLazy } from 'use-state-with-callback'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import Header from '../../Header/Header'
-import TagCluster from '../../TagCluster/TagCluster'
+import Header from '../Header/Header'
+import TagCluster from '../TagCluster/TagCluster'
 import { createDatabaseEntry, uploadImage } from '../../../services/services'
 
 export default function Create({ onBack }) {

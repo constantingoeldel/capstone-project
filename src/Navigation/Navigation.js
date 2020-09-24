@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-// eslint-disable-next-line no-unused-vars
-import { BrowserRouter as Router, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 Navigation.propTypes = {

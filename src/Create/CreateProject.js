@@ -2,19 +2,17 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 
-import Header from '../../Header/Header'
-import TagCluster from '../../TagCluster/TagCluster'
+import Header from '../Header/Header'
+import TagCluster from '../TagCluster/TagCluster'
+import getDBEntries from '../services/getDBEntries'
 
 export default function Create({ onBack }) {
-  const [tags, setTags] = useState(null)
+  const [tags, setTags] = useState([])
   const [image, setImage] = useState()
   const [newProject, setNewProject] = useState({})
 
   useEffect(() => {
-    fetch('https://unfinished-api.herokuapp.com/api/tags')
-      .then((res) => res.json())
-      .catch((error) => console.log(error))
-      .then((tags) => setTags(tags))
+    getDBEntries(process.env.REACT_APP_TAGS_URL).then((entries) => setTags(entries))
   }, [])
   return (
     <>
@@ -90,14 +88,13 @@ export default function Create({ onBack }) {
           onChange={(event) => setNewProject({ ...newProject, about: event.target.value })}
         />
         <label htmlFor='tags'>Please select tags that fit your initiative</label>
-        {tags && <TagCluster tags={tags} id='tags' onTagClick={onTagClick} />}
+        {<TagCluster tags={tags} id='tags' onTagClick={onTagClick} />}
         <button type='button' onClick={onCreate}>
           Spark progress
         </button>
       </Form>
     </>
   )
-  // Map all that have apply, fetch in central spot and use a copy of it here
   function onTagClick(tag, index) {
     setTags([
       ...tags.slice(0, index),

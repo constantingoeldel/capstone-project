@@ -14,6 +14,8 @@ export default function Opportunities({ onBack }) {
   const [projects, setProjects] = useState([])
   const [searchTerm, setSearchTerm] = useState(' ')
   const [scrollPosition, setScrollPosition] = useState(0)
+  const [currentPage, setPage] = useState(1)
+
   const numFoundProjects = projects?.filter(
     (project) => project.accordingToSearchTerms || project.accordingToSearchTerms === undefined
   ).length
@@ -47,7 +49,7 @@ export default function Opportunities({ onBack }) {
       {<TagCluster tags={tags} onTagClick={onTagClick} />}
       {projects
         ?.filter((project) => project.accordingToSearchTerms ?? project)
-        .slice(0, 20)
+        .slice(0, currentPage * 10)
         .map((project, index) => (
           <Project
             key={project._id}
@@ -65,6 +67,7 @@ export default function Opportunities({ onBack }) {
             />
           )
       )}
+      <ButtonStyled onClick={() => setPage((p) => p + 1)}>Show more results</ButtonStyled>
     </>
   )
   function toggleDetailOverlay(project, index) {
@@ -97,4 +100,17 @@ const StyledExplanation = styled.p`
   color: darkgrey;
   font-size: 80%;
   text-align: center;
+`
+const ButtonStyled = styled.button`
+  background-color: #11dc8b;
+  border: 0;
+  outline: 0;
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: white;
+  font-size: 140%;
+
+  padding: 8px 10px;
+  width: calc(100% - 40px);
+  margin: 20px 0 150px 20px;
 `

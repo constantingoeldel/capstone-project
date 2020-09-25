@@ -9,13 +9,12 @@ export function createDatabaseEntry(body) {
     body: JSON.stringify(body),
   }
 
-  fetch('http://localhost:4000/api/projects', options).then((response) => {
-    console.log(response.status)
-  })
+  fetch(process.env.REACT_APP_PROJECTS_URL, options)
+    .then((response) => console.log(response.status))
+    .catch((error) => console.log(error))
 }
 
-export function uploadImage({ image }) {
-  console.log('upload')
+export function uploadImage(image) {
   return new Promise((resolve, reject) => {
     const url = 'https://api.cloudinary.com/v1_1/drrr5s7vb/image/upload'
     const preset = 'os9r6esl'

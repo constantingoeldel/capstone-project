@@ -18,7 +18,7 @@ export function filterBySearch(searchTerm, source) {
   const projects = source.map((item) => {
     item.accordingToSearchTerms =
       fuzzysearch(searchTerm, item.title) ||
-      fuzzysearch(searchTerm, item.description) ||
+      // fuzzysearch(searchTerm, item.description) ||
       fuzzysearch(searchTerm, item.location.country) ||
       fuzzysearch(searchTerm, item.location.city) ||
       fuzzysearch(searchTerm, item.location.countrycode)

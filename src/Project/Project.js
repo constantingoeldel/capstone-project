@@ -58,6 +58,13 @@ const Card = styled.section`
   margin: 20px;
   box-shadow: 0 3px 20px rgba(1, 25, 54, 0.4);
   border-radius: 25px;
+  @media (min-width: 350px) {
+    width: 350px;
+    display: inline-block;
+    vertical-align: top;
+    height: 500px;
+    overflow: hidden;
+  }
 `
 const Img = styled.img`
   width: 100%;

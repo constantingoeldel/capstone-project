@@ -38,18 +38,20 @@ export default function Opportunities({ onBack }) {
   return (
     <>
       <Header title='Opportunities' onBack={onBack} />
+      <WiderViewPort>
+        <Search onSearch={onSearch} />
+        <StyledExplanation>
+          {numFoundProjects} out of {projects.length} Projects fit your search! You can search for a
+          projects title, country, countrycode, city or description. Searchterms are case-sensitive
+          and can omit characters. When tags are selected, results are shown in order of relevance.
+          Tags and search can be used in combination.
+        </StyledExplanation>
+        {<TagCluster tags={tags} onTagClick={onTagClick} />}
+      </WiderViewPort>
 
-      <Search onSearch={onSearch} />
-      <StyledExplanation>
-        {numFoundProjects} out of {projects.length} Projects fit your search! You can search for a
-        projects title, country, countrycode, city or description. Searchterms are case-sensitive
-        and can omit characters. When tags are selected, results are shown in order of relevance.
-        Tags and search can be used in combination.
-      </StyledExplanation>
-      {<TagCluster tags={tags} onTagClick={onTagClick} />}
       {projects
         ?.filter((project) => project.accordingToSearchTerms ?? project)
-        .slice(0, currentPage * 10)
+        .slice(0, currentPage * 16)
         .map((project, index) => (
           <Project
             key={project._id}
@@ -100,6 +102,10 @@ const StyledExplanation = styled.p`
   color: darkgrey;
   font-size: 80%;
   text-align: center;
+  @media (min-width: 500px) {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+  }
 `
 const ButtonStyled = styled.button`
   background-color: #11dc8b;
@@ -113,4 +119,17 @@ const ButtonStyled = styled.button`
   padding: 8px 10px;
   width: calc(100% - 40px);
   margin: 20px 0 150px 20px;
+`
+const WiderViewPort = styled.div`
+  @media (min-width: 500px) {
+    grid-gap: 20px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 3fr;
+  }
+  @media (min-width: 800px) {
+    grid-gap: 40px;
+    width: 60%;
+    margin-left: 20%;
+  }
 `

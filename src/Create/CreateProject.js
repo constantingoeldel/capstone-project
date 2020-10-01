@@ -185,7 +185,7 @@ export default function Create({ onBack }) {
           return { applies: false, text: tag.text }
         }),
       },
-      (newProject) => console.log(newProject)
+      (newProject) => createDatabaseEntry(newProject)
     )
   }
 }

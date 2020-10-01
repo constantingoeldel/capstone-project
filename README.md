@@ -1,3 +1,7 @@
+## Preview 
+
+![Preview](https://github.com/constantingoeldel/unfinished/blob/create-projects/public/unfinished.gif)
+
 ## Deployment:
 
 Visit the website @ https://unfinished.vercel.app/ 

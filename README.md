@@ -1,6 +1,6 @@
 ## Preview 
 
-![Preview](https://github.com/constantingoeldel/unfinished/blob/create-projects/public/unfinished.gif)
+![Preview](https://github.com/constantingoeldel/unfinished/blob/main/public/unfinished.gif)
 
 ## Deployment:
 

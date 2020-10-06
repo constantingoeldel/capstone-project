@@ -46,7 +46,6 @@ export default function App() {
     </div>
   )
 }
-
 const ContentPlacementStyled = styled(animated.div)`
   position: ${(props) => (props.visible ? 'fixed' : 'static')};
   box-shadow: ${(props) => (props.visible ? '0 3px 20px rgba(1, 25, 54, 0.4)' : 'none')};

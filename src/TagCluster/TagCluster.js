@@ -36,4 +36,8 @@ TagCluster.propTypes = {
 
 const TagList = styled.ul`
   padding: 10px;
+  @media (min-width: 500px) {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
 `

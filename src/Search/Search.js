@@ -31,6 +31,10 @@ const Form = styled.form`
   margin: 20px 10%;
   display: flex;
   justify-content: space-between;
+  @media (min-width: 500px) {
+    width: 300px;
+    height: 60px;
+  }
 `
 const Input = styled.input`
   font-size: 120%;

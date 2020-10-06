@@ -1,5 +1,5 @@
 import { sortByTags, filterBySearch } from './utils'
-const searchTerm = 'Alle'
+const searchTerm = 'Toughjoyfax'
 const searchTerm2 = 'Allejfejfiedie'
 
 const tags = ['Sport', 'People in need', 'Technology']
@@ -125,7 +125,7 @@ describe('Searching', () => {
     )
   })
   it('Returns false when SearchTerm does not apply', () => {
-    expect(filterBySearch(searchTerm, twoProjects)).toEqual(
+    expect(filterBySearch(searchTerm2, twoProjects)).toEqual(
       expect.arrayContaining([expect.objectContaining({ accordingToSearchTerms: false })])
     )
   })

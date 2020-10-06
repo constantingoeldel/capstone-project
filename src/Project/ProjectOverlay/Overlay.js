@@ -14,12 +14,14 @@ export default function Overlay({ project, onBack }) {
   const [expanded, setExpanded] = useState(null)
   const swipeDown = useSwipeable({
     onSwipedDown: () => setExpanded(false),
+    onSwipedRight: () => setExpanded(false),
+    onSwipedLeft: () => setExpanded(false),
     delta: 100,
   })
   const slideUp = useSpring({
     config: config.stiff,
     top: expanded ? '3vh' : '100vh',
-    onRest: () => expanded === false && onBack(),
+    onRest: () => expanded || onBack(),
   })
   useEffect(() => {
     setExpanded(true)
